@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {IonicPage, LoadingController, NavController, NavParams} from 'ionic-angular';
 import {ApiService} from "../../services/api.service";
 import {UserItem} from "../../classes/user";
-import {PageInfo} from "../../classes/nodes-page";
+import {NodesPage, PageInfo} from "../../classes/nodes-page";
 import {ToastService} from "../../services/toast.service";
 
 
@@ -46,9 +46,16 @@ export abstract class UserListPage {
     });
   }
 
-  abstract appendUsers():Promise<null>;
+  appendUsers():Promise<null>{
+    return this.getUsers().then(data=>{
+      this.totalCount=data.totalCount;
+      this.pageInfo=data.pageInfo;
+      Array.prototype.push.apply(this.users,data.nodes);
+      console.log(this.users);
+    });
+  }
 
-  // abstract getUsers():Promise<null>;
+  abstract getUsers():Promise<NodesPage<UserItem>>;
 
 
 }
@@ -57,13 +64,8 @@ export abstract class UserListPage {
 export class FollowersPage extends UserListPage {
   title='Followers';
 
-  appendUsers():Promise<null>{
-    return this.apiSvc.getFollowers().then(data=>{
-      this.totalCount=data.totalCount;
-      this.pageInfo=data.pageInfo;
-      this.users=data.nodes;
-      console.log(this.users);
-    });
+  getUsers(){
+    return this.apiSvc.getFollowers();
   }
 
 }
