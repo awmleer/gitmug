@@ -3,6 +3,7 @@ import {IonicPage, LoadingController, NavController, NavParams} from 'ionic-angu
 import {ToastService} from "../../services/toast.service";
 import {ApiService} from "../../services/api.service";
 import {RepoItem} from "../../classes/repo";
+import {PageInfo} from "../../classes/nodes-page";
 
 
 @IonicPage()
@@ -12,6 +13,8 @@ import {RepoItem} from "../../classes/repo";
 })
 abstract class RepoListPage {
   title:string='Repo List';
+  totalCount:number;
+  pageInfo:PageInfo;
   repos:RepoItem[]=[];
   login:string;
 
@@ -26,8 +29,10 @@ abstract class RepoListPage {
   }
 
   ionViewWillLoad() {
-    this.apiSvc.getStarredRepos(this.login).then((repos)=>{
-        Array.prototype.push.apply(this.repos,repos);
+    this.apiSvc.getStarredRepos(this.login).then((data)=>{
+      this.totalCount=data.totalCount;
+      this.pageInfo=data.pageInfo;
+      Array.prototype.push.apply(this.repos,data.nodes);
     });
   }
 

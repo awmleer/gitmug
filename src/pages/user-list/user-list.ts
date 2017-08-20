@@ -48,7 +48,7 @@ abstract class UserListPage {
   }
 
   appendUsers():Promise<null>{
-    return this.getUsers().then(data=>{
+    return this.getUsers(this.pageInfo?this.pageInfo.endCursor:null).then(data=>{
       this.totalCount=data.totalCount;
       this.pageInfo=data.pageInfo;
       Array.prototype.push.apply(this.users,data.nodes);
@@ -56,7 +56,7 @@ abstract class UserListPage {
     });
   }
 
-  abstract getUsers():Promise<NodesPage<UserItem>>;
+  abstract getUsers(cursor:string):Promise<NodesPage<UserItem>>;
 
   viewUser(user:UserItem){
     this.navCtrl.push(UserPage,{
@@ -70,8 +70,8 @@ abstract class UserListPage {
 export class FollowersPage extends UserListPage {
   title='Followers';
 
-  getUsers(){
-    return this.apiSvc.getFollowers(this.navParams.get('login'));
+  getUsers(cursor:string){
+    return this.apiSvc.getFollowers(this.navParams.get('login'),cursor);
   }
 
 }
@@ -79,8 +79,8 @@ export class FollowersPage extends UserListPage {
 export class FollowingPage extends UserListPage {
   title='Following';
 
-  getUsers(){
-    return this.apiSvc.getFollowing(this.navParams.get('login'));
+  getUsers(cursor:string){
+    return this.apiSvc.getFollowing(this.navParams.get('login'),cursor);
   }
 
 }

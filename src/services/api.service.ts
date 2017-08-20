@@ -60,7 +60,7 @@ export class ApiService {
   }
 
   private afterCursorString(cursor?:string):string{
-    return cursor?`,afterCursor:"${cursor}"`:'';
+    return cursor?`,after:"${cursor}"`:'';
   }
 
 
@@ -123,7 +123,7 @@ export class ApiService {
     });
   }
 
-  getStarredRepos(login:string,cursor?:string):Promise<NodesPage<RepoItem>>{
+  getStarredRepos(login:''|string,cursor?:string):Promise<NodesPage<RepoItem>>{
     const query=`{
       ${this.userQueryString(login)} {
     		starredRepositories(first:30 ${this.afterCursorString(cursor)} ) ${nodesPageSchema(repoItemSchema)}

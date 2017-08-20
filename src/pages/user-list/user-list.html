@@ -8,6 +8,7 @@
 
 
 <ion-content>
+
   <div *ngIf="totalCount>=0">
 
     <ion-list-header>
@@ -24,7 +25,15 @@
       </button>
     </ion-list>
 
-    <!--TODO infinite scroll-->
+    <div class="list-end-footer" *ngIf="!pageInfo.hasNextPage">
+      <span>End</span>
+    </div>
 
   </div>
+
+  <ion-infinite-scroll *ngIf="pageInfo?.hasNextPage" (ionInfinite)="$event.waitFor(appendUsers())">
+    <ion-infinite-scroll-content loadingSpinner="dots">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
 </ion-content>
