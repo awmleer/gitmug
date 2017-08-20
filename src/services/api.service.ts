@@ -52,11 +52,24 @@ export class ApiService {
   }
 
 
-  receivedEvents(username){
+  getReceivedEvents(username){
     this.restfulGet(`/users/awmleer/received_events`).then((response)=>{
       console.log(response.json());
     });
   }
+
+
+  getViewer(){
+    const query=`{
+      viewer {
+        name
+        login
+      }
+    }`;
+    return this.client.request(query);
+  }
+
+
 
 
 

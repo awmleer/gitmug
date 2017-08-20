@@ -11,7 +11,7 @@ export class HomePage {
 
   constructor(
     public navCtrl: NavController,
-    private accountSvc: AccountService,
+    public accountSvc: AccountService,
     private apiSvc: ApiService
   ) {}
 
@@ -19,21 +19,22 @@ export class HomePage {
 
   auth(){
     this.accountSvc.oAuth().then(()=>{
-        this.testString=this.apiSvc.getAccessToken();
+      this.testString=this.apiSvc.getAccessToken();
     }).catch(()=>{
-        this.testString='error';
+      this.testString='error';
     });
   }
 
   fetchToken(){
     this.accountSvc.fetchAccessTokenFromStorage().then(()=>{
-        this.testString=this.apiSvc.getAccessToken();
+      this.testString=this.apiSvc.getAccessToken();
     })
   }
 
   test(){
-    this.apiSvc.testQuery();
-    this.apiSvc.receivedEvents('awmleer');
+    this.accountSvc.freshUser();
+    // this.apiSvc.testQuery();
+    // this.apiSvc.getReceivedEvents('awmleer');
   }
 
 

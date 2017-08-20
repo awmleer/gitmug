@@ -6,11 +6,12 @@ import {AlertController} from "ionic-angular";
 import {CONST} from "../app/const";
 import {Storage} from "@ionic/storage";
 import {ApiService} from "./api.service";
+import {User} from "../classes/user";
 
 
 @Injectable()
 export class AccountService {
-
+  user:User=null;
   // public accessToken:string;
 
   constructor(
@@ -101,7 +102,11 @@ export class AccountService {
   }
 
 
-
+  freshUser():Promise<null>{
+    return this.apiSvc.getViewer().then(data=>{
+      this.user=data['viewer'];
+    });
+  }
 
 
 
