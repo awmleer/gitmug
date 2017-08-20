@@ -12,7 +12,7 @@ import {ToastService} from "../../services/toast.service";
   selector: 'page-user-list',
   templateUrl: 'user-list.html',
 })
-export class UserListPage {
+export abstract class UserListPage {
   title='User List';
   users:UserItem[]=[];
   totalCount:number;
@@ -46,9 +46,8 @@ export class UserListPage {
     });
   }
 
-  appendUsers():Promise<null>{
-    return Promise.reject(null);
-  }
+  abstract appendUsers():Promise<null>;
+
 
 }
 
