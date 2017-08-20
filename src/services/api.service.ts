@@ -3,7 +3,8 @@ import { request, GraphQLClient } from 'graphql-request'
 import {CONST} from "../app/const";
 import {Headers, Http, Response} from "@angular/http";
 import 'rxjs/add/operator/toPromise';
-import {User, UserProfile} from "../classes/user";
+import {User, UserItem, UserProfile} from "../classes/user";
+import {PageInfo} from "../classes/page-info";
 
 
 @Injectable()
@@ -109,7 +110,28 @@ export class ApiService {
   }
 
 
-
+  getFollowers():Promise<{totalCount:number;pageInfo:PageInfo;nodes:UserItem[]}>{
+    const query=`{
+      viewer {
+        followers(first:30){
+          totalCount
+          pageInfo{
+            hasNextPage
+            endCursor
+          }
+          nodes{
+            name
+            login
+            bio
+            avatarUrl
+          }
+        }
+      }
+    }`;
+    return this.client.request(query).then(data=>{
+      return data['viewer']['followers'];
+    });
+  }
 
 
 }

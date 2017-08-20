@@ -8,5 +8,21 @@
 
 
 <ion-content>
+  <div *ngIf="totalCount>=0">
 
+    <ion-list-header>
+      {{totalCount}} Users
+    </ion-list-header>
+
+    <ion-list>
+      <ion-item *ngFor="let user of users">
+        <ion-avatar item-start>
+          <img [src]="user.avatarUrl">
+        </ion-avatar>
+        <h2>{{user.name}}&nbsp;<small>{{user.login}}</small></h2>
+        <p>{{user.bio}}</p>
+      </ion-item>
+    </ion-list>
+
+  </div>
 </ion-content>
