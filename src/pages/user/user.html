@@ -24,7 +24,9 @@
           <b>{{userProfile.repositories.totalCount}}</b><br>Repos
         </ion-col>
         <ion-col>
-          <b>{{userProfile.starredRepositories.totalCount}}</b><br>Stars
+          <a (click)="viewStars()">
+            <b>{{userProfile.starredRepositories.totalCount}}</b><br>Stars
+          </a>
         </ion-col>
         <ion-col>
           <a (click)="viewFollowers()">

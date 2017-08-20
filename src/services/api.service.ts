@@ -5,6 +5,7 @@ import {Headers, Http, Response} from "@angular/http";
 import 'rxjs/add/operator/toPromise';
 import {User, UserItem, UserProfile, userProfileSchema, userSchema, userItemSchema} from "../classes/user";
 import {NodesPage, nodesPageSchema} from "../classes/nodes-page";
+import {RepoItem, repoItemSchema} from "../classes/repo";
 
 
 @Injectable()
@@ -51,6 +52,11 @@ export class ApiService {
       params:params,
       headers:this.restfulHeaders
     }).toPromise();
+  }
+
+
+  private userQueryString(login?:string):string{
+    return login?`user(login: "${login}")`:'viewer';
   }
 
 
@@ -110,6 +116,21 @@ export class ApiService {
     }`;
     return this.client.request(query).then(data=>{
       return data['user']['following'];
+    });
+  }
+
+  getStarredRepos(login?:string):Promise<NodesPage<RepoItem>>{
+    const query=`{
+      ${this.userQueryString(login)} {
+    		starredRepositories(first:30) ${nodesPageSchema(repoItemSchema)}
+      }
+    }`;
+    return this.client.request(query).then(data=>{
+      if (login) {
+        return data['user']['starredRepositories'];
+      }else{
+        return data['viewer']['starredRepositories'];
+      }
     });
   }
 
