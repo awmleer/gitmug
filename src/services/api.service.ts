@@ -3,6 +3,7 @@ import { request, GraphQLClient } from 'graphql-request'
 import {CONST} from "../app/const";
 import {Headers, Http, Response} from "@angular/http";
 import 'rxjs/add/operator/toPromise';
+import {User, UserProfile} from "../classes/user";
 
 
 @Injectable()
@@ -59,14 +60,44 @@ export class ApiService {
   }
 
 
-  getViewer(){
+  getViewer():Promise<User>{
     const query=`{
       viewer {
         name
         login
       }
     }`;
-    return this.client.request(query);
+    return this.client.request(query).then(data=>{
+      return data['viewer'];
+    });
+  }
+
+  getUserProfile():Promise<UserProfile>{
+    const query=`{
+      viewer {
+        name
+        login
+        bio
+        followers{
+          totalCount
+        }
+        following{
+          totalCount
+        }
+        starredRepositories{
+          totalCount
+        }
+        repositories{
+          totalCount
+        }
+        company
+        location
+        email
+      }
+    }`;
+    return this.client.request(query).then(data=>{
+      return data['viewer'];
+    });
   }
 
 

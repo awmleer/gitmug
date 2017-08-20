@@ -106,8 +106,8 @@ export class AccountService {
     if (!this.apiSvc.getAccessToken()) {
       throw new Error('No token');
     }
-    return this.apiSvc.getViewer().then(data=>{
-      this.user=data['viewer'];
+    return this.apiSvc.getViewer().then(user=>{
+      this.user=user;
     });
   }
 
