@@ -8,6 +8,7 @@ export class UserProfile {
   name:string;
   login:string;
   bio:string;
+  avatarUrl:string;
   followers:{
     totalCount:number;
   };
@@ -30,10 +31,5 @@ export class UserProfile {
   company:string;
   location:string;
   email:string;
-}
-
-
-export class UserProfileOther extends UserProfile {
-
 }
 

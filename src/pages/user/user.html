@@ -7,6 +7,29 @@
 </ion-header>
 
 
-<ion-content padding>
-
+<ion-content>
+  <div *ngIf="userProfile">
+    <div class="meta">
+      <img [src]="userProfile.avatarUrl" class="big-avatar">
+      <h2 class="name">{{userProfile.name}}</h2>
+      <h3 class="login">{{userProfile.login}}</h3>
+      <p class="bio">{{userProfile.bio}}</p>
+    </div>
+    <div class="statistic">
+      <ion-row>
+        <ion-col>
+          <b>{{userProfile.repositories.totalCount}}</b><br>Repos
+        </ion-col>
+        <ion-col>
+          <b>{{userProfile.starredRepositories.totalCount}}</b><br>Stars
+        </ion-col>
+        <ion-col>
+          <b>{{userProfile.followers.totalCount}}</b><br>Followers
+        </ion-col>
+        <ion-col>
+          <b>{{userProfile.following.totalCount}}</b><br>Following
+        </ion-col>
+      </ion-row>
+    </div>
+  </div>
 </ion-content>

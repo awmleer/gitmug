@@ -1,3 +1,32 @@
 page-user {
+  div.meta{
+    padding:3rem 0 0;
+    text-align: center;
+    img.big-avatar{
+      border-radius: 1rem;
+      width:30%;
+      max-width:150px;
+      box-shadow: 0 0 10px 5px rgba(158, 158, 158, 0.1);
+    }
+    h2.name{
+      font-size: 3rem;
+    }
+    h3.login{
+      color: #9f9f9f;
+      font-size: 2rem;
+    }
+    p.bio{
+      font-size: 1.4rem;
+    }
+  }
+  div.statistic{
+    padding:0 15px;
+    ion-col{
+      text-align: center;
+      b{
+        font-size: 2rem;
+      }
+    }
+  }
 
 }

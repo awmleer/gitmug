@@ -78,6 +78,7 @@ export class ApiService {
         name
         login
         bio
+        avatarUrl
         followers{
           totalCount
         }
