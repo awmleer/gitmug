@@ -9,4 +9,29 @@
 
 <ion-content>
 
+  <div *ngIf="totalCount>=0">
+
+    <ion-list-header>
+      {{totalCount}} Repos
+    </ion-list-header>
+
+    <ion-list>
+      <button ion-item *ngFor="let repo of repos" (click)="viewRepo(repo)">
+        <h2>{{repo.owner.login}}/{{repo.name}}</h2>
+        <p>{{repo.description}}</p>
+        <p>{{repo.primaryLanguage?.name}}</p>
+      </button>
+    </ion-list>
+
+    <div class="list-end-footer" *ngIf="!pageInfo.hasNextPage">
+      <span>End</span>
+    </div>
+
+  </div>
+
+  <ion-infinite-scroll *ngIf="pageInfo?.hasNextPage" (ionInfinite)="$event.waitFor(appendRepos())">
+    <ion-infinite-scroll-content loadingSpinner="dots">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
 </ion-content>

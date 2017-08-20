@@ -3,7 +3,7 @@ import {IonicPage, LoadingController, NavController, NavParams} from 'ionic-angu
 import {ToastService} from "../../services/toast.service";
 import {ApiService} from "../../services/api.service";
 import {RepoItem} from "../../classes/repo";
-import {PageInfo} from "../../classes/nodes-page";
+import {NodesPage, PageInfo} from "../../classes/nodes-page";
 
 
 @IonicPage()
@@ -29,17 +29,46 @@ abstract class RepoListPage {
   }
 
   ionViewWillLoad() {
-    this.apiSvc.getStarredRepos(this.login).then((data)=>{
-      this.totalCount=data.totalCount;
-      this.pageInfo=data.pageInfo;
-      Array.prototype.push.apply(this.repos,data.nodes);
+    this.initRepos();
+  }
+
+  initRepos(){
+    let loading=this.loadingCtrl.create({
+      spinner: 'dots',
+      content: 'Loading'
+    });
+    loading.present();
+    this.appendRepos().then(()=>{
+      loading.dismiss();
+    }).catch(()=>{
+      this.navCtrl.pop();
+      loading.dismiss().then(()=>{
+        this.toastSvc.toast('Fail to load repos');
+      });
     });
   }
 
+  appendRepos():Promise<null>{
+    return this.getRepos(this.pageInfo?this.pageInfo.endCursor:null).then(data=>{
+      this.totalCount=data.totalCount;
+      this.pageInfo=data.pageInfo;
+      Array.prototype.push.apply(this.repos,data.nodes);
+      console.log(this.repos);
+    });
+  }
+
+  abstract getRepos(cursor:string):Promise<NodesPage<RepoItem>>;
+
+  viewRepo(repo:RepoItem){
+
+  }
 
 }
 
 
 export class StarredReposPage extends RepoListPage {
-
+  title='Starred Repos';
+  getRepos(cursor:string){
+    return this.apiSvc.getStarredRepos(this.login,cursor);
+  }
 }
