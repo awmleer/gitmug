@@ -15,13 +15,13 @@
     </ion-list-header>
 
     <ion-list>
-      <ion-item *ngFor="let user of users">
+      <button ion-item *ngFor="let user of users" (click)="viewUser(user)">
         <ion-avatar item-start>
           <img [src]="user.avatarUrl">
         </ion-avatar>
         <h2>{{user.name}}&nbsp;<small>{{user.login}}</small></h2>
         <p>{{user.bio}}</p>
-      </ion-item>
+      </button>
     </ion-list>
 
     <!--TODO infinite scroll-->

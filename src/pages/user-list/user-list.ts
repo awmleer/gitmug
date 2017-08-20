@@ -58,11 +58,11 @@ export abstract class UserListPage {
 
   abstract getUsers():Promise<NodesPage<UserItem>>;
 
-  // viewUser(user:UserItem){
-  //   this.navCtrl.push(UserPage,{
-  //
-  //   });
-  // }
+  viewUser(user:UserItem){
+    this.navCtrl.push(UserPage,{
+      'login':user.login
+    });
+  }
 
 }
 

@@ -116,7 +116,7 @@ export class ApiService {
       user(login: "${login}") ${this.userProfileQuerySchema}
     }`;
     return this.client.request(query).then(data=>{
-      return data['viewer'];
+      return data['user'];
     });
   }
 

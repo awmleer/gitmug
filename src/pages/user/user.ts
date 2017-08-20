@@ -51,6 +51,7 @@ export class UserPage {
   viewFollowing(){
     this.navCtrl.push(FollowingPage);
   }
+  //  TODO need to fix: following & followers always show mine
 
 }
 
