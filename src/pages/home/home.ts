@@ -33,6 +33,7 @@ export class HomePage {
 
   test(){
     this.apiSvc.testQuery();
+    this.apiSvc.receivedEvents('awmleer');
   }
 
 
