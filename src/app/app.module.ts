@@ -18,6 +18,7 @@ import {ApiService} from "../services/api.service";
 import {UserPageModule} from "../pages/user/user.module";
 import {UserListPageModule} from "../pages/user-list/user-list.module";
 import {ToastService} from "../services/toast.service";
+import {RepoListPageModule} from "../pages/repo-list/repo-list.module";
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import {ToastService} from "../services/toast.service";
     IonicStorageModule.forRoot(),
     UserPageModule,
     UserListPageModule,
+    RepoListPageModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [

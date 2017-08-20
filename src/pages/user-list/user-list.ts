@@ -13,7 +13,7 @@ import {UserPage} from "../user/user";
   selector: 'page-user-list',
   templateUrl: 'user-list.html',
 })
-export abstract class UserListPage {
+abstract class UserListPage {
   title='User List';
   users:UserItem[]=[];
   totalCount:number;

@@ -4,7 +4,7 @@ import {CONST} from "../app/const";
 import {Headers, Http, Response} from "@angular/http";
 import 'rxjs/add/operator/toPromise';
 import {User, UserItem, UserProfile} from "../classes/user";
-import {NodesPage, PageInfo} from "../classes/nodes-page";
+import {NodesPage} from "../classes/nodes-page";
 
 
 @Injectable()
