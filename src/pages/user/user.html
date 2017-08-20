@@ -8,13 +8,16 @@
 
 
 <ion-content>
+
   <div *ngIf="userProfile">
+
     <div class="meta">
       <img [src]="userProfile.avatarUrl" class="big-avatar">
       <h2 class="name">{{userProfile.name}}</h2>
       <h3 class="login">{{userProfile.login}}</h3>
       <p class="bio">{{userProfile.bio}}</p>
     </div>
+
     <div class="statistic">
       <ion-row>
         <ion-col>
@@ -31,5 +34,31 @@
         </ion-col>
       </ion-row>
     </div>
+
+    <ion-list>
+      <ion-item>
+        <ion-avatar item-start>
+          <ion-icon name="people"></ion-icon>
+        </ion-avatar>
+        <h2>Company</h2>
+        <p>{{userProfile.company}}</p>
+      </ion-item>
+      <ion-item>
+        <ion-avatar item-start>
+          <ion-icon name="navigate"></ion-icon>
+        </ion-avatar>
+        <h2>Location</h2>
+        <p>{{userProfile.location}}</p>
+      </ion-item>
+      <ion-item>
+        <ion-avatar item-start>
+          <ion-icon name="mail"></ion-icon>
+        </ion-avatar>
+        <h2>Email</h2>
+        <p>{{userProfile.email}}</p>
+      </ion-item>
+    </ion-list>
+
   </div>
+
 </ion-content>

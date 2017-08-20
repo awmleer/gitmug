@@ -20,11 +20,20 @@ page-user {
     }
   }
   div.statistic{
-    padding:0 15px;
+    padding:5px 15px 25px;
     ion-col{
       text-align: center;
       b{
         font-size: 2rem;
+      }
+    }
+  }
+
+  ion-list{
+    ion-avatar{
+      text-align: center;
+      ion-icon{
+        font-size: 3.6rem;
       }
     }
   }
