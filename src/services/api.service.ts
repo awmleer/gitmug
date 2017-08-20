@@ -90,6 +90,13 @@ export class ApiService {
         repositories{
           totalCount
         }
+        pinnedRepositories(first: 10){
+          nodes{
+            id,
+            name,
+            description
+          }
+        }
         company
         location
         email

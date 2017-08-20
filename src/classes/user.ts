@@ -20,13 +20,20 @@ export class UserProfile {
   repositories:{
     totalCount:number;
   };
+  pinnedRepositories:{
+    nodes:[{
+      id:string;
+      name:string;
+      description:string;
+    }];
+  };
   company:string;
   location:string;
   email:string;
 }
 
 
-export class UserProfileOther {
+export class UserProfileOther extends UserProfile {
 
 }
 

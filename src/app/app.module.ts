@@ -15,6 +15,7 @@ import {AccountService} from "../services/account.service";
 import {HttpModule} from "@angular/http";
 import {IonicStorageModule} from "@ionic/storage";
 import {ApiService} from "../services/api.service";
+import {UserPageModule} from "../pages/user/user.module";
 
 @NgModule({
   declarations: [
@@ -22,13 +23,14 @@ import {ApiService} from "../services/api.service";
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage
+    TabsPage,
   ],
   imports: [
     BrowserModule,
     HttpModule,
     IonicModule.forRoot(MyApp),
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    UserPageModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -36,7 +38,7 @@ import {ApiService} from "../services/api.service";
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage
+    TabsPage,
   ],
   providers: [
     StatusBar,
