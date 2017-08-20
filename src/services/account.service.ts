@@ -5,19 +5,20 @@ import 'rxjs/add/operator/toPromise';
 import {AlertController} from "ionic-angular";
 import {CONST} from "../app/const";
 import {Storage} from "@ionic/storage";
-import { request, GraphQLClient } from 'graphql-request'
+import {ApiService} from "./api.service";
 
 
 @Injectable()
 export class AccountService {
 
-  public accessToken:string;
+  // public accessToken:string;
 
   constructor(
     private inAppBrowser: InAppBrowser,
     private alertCtrl: AlertController,
     private storage: Storage,
-    private http: Http
+    private apiSvc: ApiService,
+    private http: Http,
   ) {}
 
   oAuth():Promise<null>{
@@ -84,33 +85,23 @@ export class AccountService {
       if (data['error']) {
         throw new Error(data['error']);
       }
-      this.accessToken=data['access_token'];
-      this.storage.set('accessToken',this.accessToken);
-      console.log(this.accessToken);
+      let accessToken=data['access_token'];
+      this.apiSvc.setAccessToken(accessToken);
+      this.storage.set('accessToken',accessToken);
+      console.log(accessToken);
       return;
     });
   }
 
 
   fetchAccessTokenFromStorage(){
-    return this.storage.get('accessToken').then(data=>{
-      this.accessToken=data;
+    return this.storage.get('accessToken').then(accessToken=>{
+      this.apiSvc.setAccessToken(accessToken);
     });
   }
 
 
-  testQuery(){
-    const query=`{
-        viewer {
-          login
-          name
-        }
-      }`;
-    const client = new GraphQLClient(CONST.graphqlUrl, { headers: {'Authorization':`bearer ${this.accessToken}`} });
-    client.request(query).then(data => {
-      console.log(data);
-    });
-  }
+
 
 
 

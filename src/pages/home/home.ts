@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import {AccountService} from "../../services/account.service";
+import {ApiService} from "../../services/api.service";
 
 @Component({
   selector: 'page-home',
@@ -10,27 +11,28 @@ export class HomePage {
 
   constructor(
     public navCtrl: NavController,
-    private accountService: AccountService
+    private accountSvc: AccountService,
+    private apiSvc: ApiService
   ) {}
 
   testString:string;
 
   auth(){
-    this.accountService.oAuth().then(()=>{
-        this.testString=this.accountService.accessToken;
+    this.accountSvc.oAuth().then(()=>{
+        this.testString=this.apiSvc.getAccessToken();
     }).catch(()=>{
         this.testString='error';
     });
   }
 
   fetchToken(){
-    this.accountService.fetchAccessTokenFromStorage().then(()=>{
-        this.testString=this.accountService.accessToken;
+    this.accountSvc.fetchAccessTokenFromStorage().then(()=>{
+        this.testString=this.apiSvc.getAccessToken();
     })
   }
 
   test(){
-    this.accountService.testQuery();
+    this.apiSvc.testQuery();
   }
 
 

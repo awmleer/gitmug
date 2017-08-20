@@ -14,6 +14,7 @@ import {InAppBrowser} from "@ionic-native/in-app-browser";
 import {AccountService} from "../services/account.service";
 import {HttpModule} from "@angular/http";
 import {IonicStorageModule} from "@ionic/storage";
+import {ApiService} from "../services/api.service";
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import {IonicStorageModule} from "@ionic/storage";
     StatusBar,
     SplashScreen,
     InAppBrowser,
+    ApiService,
     AccountService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
