@@ -9,7 +9,7 @@
 
 <ion-content>
 
-  <div *ngIf="userProfile">
+  <div *ngIf="userProfile" style="padding-bottom: 30px">
 
     <div class="meta">
       <img [src]="userProfile.avatarUrl" class="big-avatar">
@@ -35,6 +35,9 @@
       </ion-row>
     </div>
 
+    <ion-list-header>
+      Info
+    </ion-list-header>
     <ion-list>
       <ion-item>
         <ion-avatar item-start>
@@ -56,6 +59,16 @@
         </ion-avatar>
         <h2>Email</h2>
         <p>{{userProfile.email}}</p>
+      </ion-item>
+    </ion-list>
+
+    <ion-list-header>
+      Pinned Repos
+    </ion-list-header>
+    <ion-list>
+      <ion-item *ngFor="let repo of userProfile.pinnedRepositories.nodes">
+        <h2>{{repo.name}}</h2>
+        <p>{{repo.description}}</p>
       </ion-item>
     </ion-list>
 
