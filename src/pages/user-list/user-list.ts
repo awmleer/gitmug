@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {IonicPage, LoadingController, NavController, NavParams} from 'ionic-angular';
 import {ApiService} from "../../services/api.service";
 import {UserItem} from "../../classes/user";
-import {PageInfo} from "../../classes/page-info";
+import {PageInfo} from "../../classes/nodes-page";
 import {ToastService} from "../../services/toast.service";
 
 
@@ -47,6 +47,8 @@ export abstract class UserListPage {
   }
 
   abstract appendUsers():Promise<null>;
+
+  // abstract getUsers():Promise<null>;
 
 
 }

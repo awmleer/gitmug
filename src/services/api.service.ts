@@ -4,7 +4,7 @@ import {CONST} from "../app/const";
 import {Headers, Http, Response} from "@angular/http";
 import 'rxjs/add/operator/toPromise';
 import {User, UserItem, UserProfile} from "../classes/user";
-import {PageInfo} from "../classes/page-info";
+import {NodesPage, PageInfo} from "../classes/nodes-page";
 
 
 @Injectable()
@@ -110,7 +110,7 @@ export class ApiService {
   }
 
 
-  getFollowers():Promise<{totalCount:number;pageInfo:PageInfo;nodes:UserItem[]}>{
+  getFollowers():Promise<NodesPage<UserItem>>{
     const query=`{
       viewer {
         followers(first:30){
