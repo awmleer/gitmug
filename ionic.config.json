@@ -2,6 +2,15 @@
   "name": "GitPub",
   "app_id": "",
   "type": "ionic-angular",
+  "proxies": [
+    {
+      "path": "/api",
+      "proxyUrl": "https://api.github.com"
+    },{
+      "path": "/github",
+      "proxyUrl": "https://github.com"
+    }
+  ],
   "integrations": {
     "cordova": {}
   }
