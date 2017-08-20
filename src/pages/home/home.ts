@@ -13,8 +13,14 @@ export class HomePage {
     private accountService: AccountService
   ) {}
 
+  testString:string;
+
   auth(){
-    this.accountService.oAuth();
+    this.accountService.oAuth().then(()=>{
+        this.testString=this.accountService.accessToken;
+    }).catch(()=>{
+        this.testString='error';
+    });
   }
 
 }
