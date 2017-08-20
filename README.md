@@ -31,3 +31,4 @@ Substitute ios for android if not on a Mac.
 - [^] improve
 - [~] refactor
 - [!] fix
+- [*] try
