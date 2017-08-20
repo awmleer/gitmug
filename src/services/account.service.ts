@@ -44,7 +44,7 @@ export class AccountService {
             {
               text: 'OK',
               handler: data => {
-                this.getAccessToken(data.code,state).then(()=>{
+                this.obtainAccessToken(data.code,state).then(()=>{
                     resolve();
                 });
               }
@@ -66,13 +66,13 @@ export class AccountService {
         if (returnState != state) {
           throw new Error('State check fail');
         }
-        return this.getAccessToken(code,state);
+        return this.obtainAccessToken(code,state);
       }
     });
   }
 
 
-  getAccessToken(code,state):Promise<null>{
+  obtainAccessToken(code,state):Promise<null>{
     return this.http.post(`${CONST.githubUrl}/login/oauth/access_token`,
       `client_id=ca1ddf99e44c2e6cb787&client_secret=61335ff161c4c0fda8fbf68beb0e1bee55380414&code=${code}&redirect_uri=http%3A%2F%2Fgitpub%2Foauth%2Fcallback%2F&state=${state}`,
       {
@@ -103,6 +103,9 @@ export class AccountService {
 
 
   freshUser():Promise<null>{
+    if (!this.apiSvc.getAccessToken()) {
+      throw new Error('No token');
+    }
     return this.apiSvc.getViewer().then(data=>{
       this.user=data['viewer'];
     });
