@@ -3,6 +3,7 @@ import {IonicPage, LoadingController, NavController, NavParams} from 'ionic-angu
 import {ApiService} from "../../services/api.service";
 import {UserItem} from "../../classes/user";
 import {PageInfo} from "../../classes/page-info";
+import {ToastService} from "../../services/toast.service";
 
 
 
@@ -20,26 +21,32 @@ export class UserListPage {
   constructor(
     protected navCtrl: NavController,
     protected apiSvc: ApiService,
+    protected toastSvc: ToastService,
     // public navParams: NavParams,
     protected loadingCtrl: LoadingController
   ) {}
 
   ionViewWillLoad(){
-    this.loadUserList();
+    this.initUsers();
   }
 
-  loadUserList(){
+  initUsers(){
     let loading=this.loadingCtrl.create({
       spinner: 'dots',
       content: 'Loading'
     });
     loading.present();
-    this.loadUserListData().then(()=>{
+    this.appendUsers().then(()=>{
       loading.dismiss();
+    }).catch(()=>{
+      this.navCtrl.pop();
+      loading.dismiss().then(()=>{
+        this.toastSvc.toast('Fail to load users');
+      });
     });
   }
 
-  loadUserListData():Promise<null>{
+  appendUsers():Promise<null>{
     return Promise.reject(null);
   }
 
@@ -49,7 +56,7 @@ export class UserListPage {
 export class FollowersPage extends UserListPage {
   title='Followers';
 
-  loadUserListData():Promise<null>{
+  appendUsers():Promise<null>{
     return this.apiSvc.getFollowers().then(data=>{
       this.totalCount=data.totalCount;
       this.pageInfo=data.pageInfo;

@@ -17,6 +17,7 @@ import {IonicStorageModule} from "@ionic/storage";
 import {ApiService} from "../services/api.service";
 import {UserPageModule} from "../pages/user/user.module";
 import {UserListPageModule} from "../pages/user-list/user-list.module";
+import {ToastService} from "../services/toast.service";
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import {UserListPageModule} from "../pages/user-list/user-list.module";
     StatusBar,
     SplashScreen,
     InAppBrowser,
+    ToastService,
     ApiService,
     AccountService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
