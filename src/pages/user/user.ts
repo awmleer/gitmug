@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {IonicPage, LoadingController, NavController, NavParams} from 'ionic-angular';
 import {ApiService} from "../../services/api.service";
 import {UserProfile} from "../../classes/user";
+import {UserListPage} from "../user-list/user-list";
 
 
 
@@ -36,6 +37,12 @@ export class UserPage {
       this.userProfile=userProfile;
       console.log(this.userProfile);
       loading.dismiss();
+    });
+  }
+
+  viewFollowers(){
+    this.navCtrl.push(UserListPage,{
+      title:'Followers'
     });
   }
 

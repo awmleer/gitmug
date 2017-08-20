@@ -16,6 +16,7 @@ import {HttpModule} from "@angular/http";
 import {IonicStorageModule} from "@ionic/storage";
 import {ApiService} from "../services/api.service";
 import {UserPageModule} from "../pages/user/user.module";
+import {UserListPageModule} from "../pages/user-list/user-list.module";
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import {UserPageModule} from "../pages/user/user.module";
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
     UserPageModule,
+    UserListPageModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [

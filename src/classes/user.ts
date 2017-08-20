@@ -4,11 +4,12 @@ export class User {
 }
 
 
-export class UserProfile {
-  name:string;
-  login:string;
+export class UserItem extends User {
   bio:string;
   avatarUrl:string;
+}
+
+export class UserProfile extends UserItem {
   followers:{
     totalCount:number;
   };
