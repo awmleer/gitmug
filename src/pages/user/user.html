@@ -32,7 +32,9 @@
           </a>
         </ion-col>
         <ion-col>
-          <b>{{userProfile.following.totalCount}}</b><br>Following
+          <a (click)="viewFollowing()">
+            <b>{{userProfile.following.totalCount}}</b><br>Following
+          </a>
         </ion-col>
       </ion-row>
     </div>

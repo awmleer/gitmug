@@ -70,3 +70,12 @@ export class FollowersPage extends UserListPage {
 
 }
 
+export class FollowingPage extends UserListPage {
+  title='Following';
+
+  getUsers(){
+    return this.apiSvc.getFollowing();
+  }
+
+}
+

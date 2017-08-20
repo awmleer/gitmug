@@ -133,5 +133,28 @@ export class ApiService {
     });
   }
 
+  getFollowing():Promise<NodesPage<UserItem>>{
+    const query=`{
+      viewer {
+        following(first:30){
+          totalCount
+          pageInfo{
+            hasNextPage
+            endCursor
+          }
+          nodes{
+            name
+            login
+            bio
+            avatarUrl
+          }
+        }
+      }
+    }`;
+    return this.client.request(query).then(data=>{
+      return data['viewer']['following'];
+    });
+  }
+
 
 }
