@@ -45,13 +45,16 @@ export class UserPage {
   }
 
   viewFollowers(){
-    this.navCtrl.push(FollowersPage);
+    this.navCtrl.push(FollowersPage,{
+      'login':this.userProfile.login
+    });
   }
 
   viewFollowing(){
-    this.navCtrl.push(FollowingPage);
+    this.navCtrl.push(FollowingPage,{
+      'login':this.userProfile.login
+    });
   }
-  //  TODO need to fix: following & followers always show mine
 
 }
 

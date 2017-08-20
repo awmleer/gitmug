@@ -121,9 +121,9 @@ export class ApiService {
   }
 
 
-  getFollowers():Promise<NodesPage<UserItem>>{
+  getFollowers(login:string):Promise<NodesPage<UserItem>>{
     const query=`{
-      viewer {
+      user(login: "${login}") {
         followers(first:30){
           totalCount
           pageInfo{
@@ -140,13 +140,13 @@ export class ApiService {
       }
     }`;
     return this.client.request(query).then(data=>{
-      return data['viewer']['followers'];
+      return data['user']['followers'];
     });
   }
 
-  getFollowing():Promise<NodesPage<UserItem>>{
+  getFollowing(login:string):Promise<NodesPage<UserItem>>{
     const query=`{
-      viewer {
+      user(login: "${login}") {
         following(first:30){
           totalCount
           pageInfo{
@@ -163,7 +163,7 @@ export class ApiService {
       }
     }`;
     return this.client.request(query).then(data=>{
-      return data['viewer']['following'];
+      return data['user']['following'];
     });
   }
 

@@ -23,7 +23,7 @@ export abstract class UserListPage {
     protected navCtrl: NavController,
     protected apiSvc: ApiService,
     protected toastSvc: ToastService,
-    // public navParams: NavParams,
+    public navParams: NavParams,
     protected loadingCtrl: LoadingController
   ) {}
 
@@ -71,7 +71,7 @@ export class FollowersPage extends UserListPage {
   title='Followers';
 
   getUsers(){
-    return this.apiSvc.getFollowers();
+    return this.apiSvc.getFollowers(this.navParams.get('login'));
   }
 
 }
@@ -80,7 +80,7 @@ export class FollowingPage extends UserListPage {
   title='Following';
 
   getUsers(){
-    return this.apiSvc.getFollowing();
+    return this.apiSvc.getFollowing(this.navParams.get('login'));
   }
 
 }
