@@ -73,36 +73,47 @@ export class ApiService {
     });
   }
 
-  getUserProfile():Promise<UserProfile>{
-    const query=`{
-      viewer {
-        name
-        login
-        bio
-        avatarUrl
-        followers{
-          totalCount
-        }
-        following{
-          totalCount
-        }
-        starredRepositories{
-          totalCount
-        }
-        repositories{
-          totalCount
-        }
-        pinnedRepositories(first: 10){
-          nodes{
-            id,
-            name,
-            description
-          }
-        }
-        company
-        location
-        email
+  private userProfileQuerySchema=`{
+    name
+    login
+    bio
+    avatarUrl
+    followers{
+      totalCount
+    }
+    following{
+      totalCount
+    }
+    starredRepositories{
+      totalCount
+    }
+    repositories{
+      totalCount
+    }
+    pinnedRepositories(first: 10){
+      nodes{
+        id,
+        name,
+        description
       }
+    }
+    company
+    location
+    email
+  }`;
+
+  getMyProfile():Promise<UserProfile>{
+    const query=`{
+      viewer ${this.userProfileQuerySchema}
+    }`;
+    return this.client.request(query).then(data=>{
+      return data['viewer'];
+    });
+  }
+
+  getUserProfile(login:string):Promise<UserProfile>{
+    const query=`{
+      user(login: "${login}") ${this.userProfileQuerySchema}
     }`;
     return this.client.request(query).then(data=>{
       return data['viewer'];

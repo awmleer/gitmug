@@ -4,6 +4,7 @@ import {ApiService} from "../../services/api.service";
 import {UserItem} from "../../classes/user";
 import {NodesPage, PageInfo} from "../../classes/nodes-page";
 import {ToastService} from "../../services/toast.service";
+import {UserPage} from "../user/user";
 
 
 
@@ -57,6 +58,11 @@ export abstract class UserListPage {
 
   abstract getUsers():Promise<NodesPage<UserItem>>;
 
+  // viewUser(user:UserItem){
+  //   this.navCtrl.push(UserPage,{
+  //
+  //   });
+  // }
 
 }
 

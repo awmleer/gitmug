@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {IonicPage, LoadingController, NavController, NavParams} from 'ionic-angular';
 import {ApiService} from "../../services/api.service";
-import {UserProfile} from "../../classes/user";
+import {User, UserProfile} from "../../classes/user";
 import {FollowersPage, FollowingPage} from "../user-list/user-list";
 
 
@@ -15,10 +15,10 @@ export class UserPage {
   userProfile:UserProfile;
 
   constructor(
-    public navCtrl: NavController,
-    public navParams: NavParams,
-    private loadingCtrl: LoadingController,
-    private apiSvc: ApiService
+    protected navCtrl: NavController,
+    protected navParams: NavParams,
+    protected loadingCtrl: LoadingController,
+    protected apiSvc: ApiService
   ) {}
 
 
@@ -33,11 +33,15 @@ export class UserPage {
       content: 'Loading'
     });
     loading.present();
-    this.apiSvc.getUserProfile().then(userProfile=>{
+    this.getUserProfile().then((userProfile:UserProfile)=>{
       this.userProfile=userProfile;
-      console.log(this.userProfile);
       loading.dismiss();
+      console.log(this.userProfile);
     });
+  }
+
+  getUserProfile():Promise<UserProfile>{
+    return this.apiSvc.getUserProfile(this.navParams.get('login'));
   }
 
   viewFollowers(){
@@ -48,7 +52,10 @@ export class UserPage {
     this.navCtrl.push(FollowingPage);
   }
 
+}
 
-
-
+export class MePage extends UserPage {
+  getUserProfile():Promise<UserProfile>{
+    return this.apiSvc.getMyProfile();
+  }
 }
