@@ -3,8 +3,8 @@ import { request, GraphQLClient } from 'graphql-request'
 import {CONST} from "../app/const";
 import {Headers, Http, Response} from "@angular/http";
 import 'rxjs/add/operator/toPromise';
-import {User, UserItem, UserProfile} from "../classes/user";
-import {NodesPage} from "../classes/nodes-page";
+import {User, UserItem, UserProfile, userProfileSchema, userSchema, userItemSchema} from "../classes/user";
+import {NodesPage, nodesPageSchema} from "../classes/nodes-page";
 
 
 @Injectable()
@@ -63,48 +63,18 @@ export class ApiService {
 
   getViewer():Promise<User>{
     const query=`{
-      viewer {
-        name
-        login
-      }
+      viewer ${userSchema}
     }`;
     return this.client.request(query).then(data=>{
       return data['viewer'];
     });
   }
 
-  private userProfileQuerySchema=`{
-    name
-    login
-    bio
-    avatarUrl
-    followers{
-      totalCount
-    }
-    following{
-      totalCount
-    }
-    starredRepositories{
-      totalCount
-    }
-    repositories{
-      totalCount
-    }
-    pinnedRepositories(first: 10){
-      nodes{
-        id,
-        name,
-        description
-      }
-    }
-    company
-    location
-    email
-  }`;
+
 
   getMyProfile():Promise<UserProfile>{
     const query=`{
-      viewer ${this.userProfileQuerySchema}
+      viewer ${userProfileSchema}
     }`;
     return this.client.request(query).then(data=>{
       return data['viewer'];
@@ -113,7 +83,7 @@ export class ApiService {
 
   getUserProfile(login:string):Promise<UserProfile>{
     const query=`{
-      user(login: "${login}") ${this.userProfileQuerySchema}
+      user(login: "${login}") ${userProfileSchema}
     }`;
     return this.client.request(query).then(data=>{
       return data['user'];
@@ -124,19 +94,7 @@ export class ApiService {
   getFollowers(login:string):Promise<NodesPage<UserItem>>{
     const query=`{
       user(login: "${login}") {
-        followers(first:30){
-          totalCount
-          pageInfo{
-            hasNextPage
-            endCursor
-          }
-          nodes{
-            name
-            login
-            bio
-            avatarUrl
-          }
-        }
+        followers(first:30) ${nodesPageSchema(userItemSchema)}
       }
     }`;
     return this.client.request(query).then(data=>{
@@ -147,19 +105,7 @@ export class ApiService {
   getFollowing(login:string):Promise<NodesPage<UserItem>>{
     const query=`{
       user(login: "${login}") {
-        following(first:30){
-          totalCount
-          pageInfo{
-            hasNextPage
-            endCursor
-          }
-          nodes{
-            name
-            login
-            bio
-            avatarUrl
-          }
-        }
+        following(first:30) ${nodesPageSchema(userItemSchema)}
       }
     }`;
     return this.client.request(query).then(data=>{

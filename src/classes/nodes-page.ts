@@ -9,3 +9,14 @@ export interface NodesPage<T> {
   pageInfo:PageInfo;
   nodes:T[];
 }
+
+export function nodesPageSchema(nodeSchema:string){
+  return `{
+    totalCount
+    pageInfo{
+      hasNextPage
+      endCursor
+    }
+    nodes ${nodeSchema}
+  }`
+}
