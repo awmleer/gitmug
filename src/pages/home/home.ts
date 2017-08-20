@@ -23,6 +23,16 @@ export class HomePage {
     });
   }
 
+  fetchToken(){
+    this.accountService.fetchAccessTokenFromStorage().then(()=>{
+        this.testString=this.accountService.accessToken;
+    })
+  }
+
+  test(){
+    this.accountService.testQuery();
+  }
+
 
 
 }

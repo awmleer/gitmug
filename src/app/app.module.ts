@@ -13,6 +13,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import {InAppBrowser} from "@ionic-native/in-app-browser";
 import {AccountService} from "../services/account.service";
 import {HttpModule} from "@angular/http";
+import {IonicStorageModule} from "@ionic/storage";
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import {HttpModule} from "@angular/http";
   imports: [
     BrowserModule,
     HttpModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
