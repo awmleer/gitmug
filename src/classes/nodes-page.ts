@@ -13,7 +13,7 @@ export interface NodesPage<T> {
 export function nodesPageSchema(nodeSchema:string){
   return `{
     totalCount
-    pageInfo{
+    pageInfo {
       hasNextPage
       endCursor
     }

@@ -73,7 +73,9 @@ export class MePage extends UserPage {
   }
 
   viewStars(){
-    this.navCtrl.push(StarredReposPage);
+    this.navCtrl.push(StarredReposPage,{
+      'login':''
+    });
   }
 
 }

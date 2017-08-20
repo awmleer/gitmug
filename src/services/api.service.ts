@@ -59,6 +59,10 @@ export class ApiService {
     return login?`user(login: "${login}")`:'viewer';
   }
 
+  private afterCursorString(cursor?:string):string{
+    return cursor?`,afterCursor:"${cursor}"`:'';
+  }
+
 
   getReceivedEvents(username){
     this.restfulGet(`/users/awmleer/received_events`).then((response)=>{
@@ -97,10 +101,10 @@ export class ApiService {
   }
 
 
-  getFollowers(login:string):Promise<NodesPage<UserItem>>{
+  getFollowers(login:string,cursor?:string):Promise<NodesPage<UserItem>>{
     const query=`{
       user(login: "${login}") {
-        followers(first:30) ${nodesPageSchema(userItemSchema)}
+        followers(first:30 ${this.afterCursorString(cursor)} ) ${nodesPageSchema(userItemSchema)}
       }
     }`;
     return this.client.request(query).then(data=>{
@@ -108,10 +112,10 @@ export class ApiService {
     });
   }
 
-  getFollowing(login:string):Promise<NodesPage<UserItem>>{
+  getFollowing(login:string,cursor?:string):Promise<NodesPage<UserItem>>{
     const query=`{
       user(login: "${login}") {
-        following(first:30) ${nodesPageSchema(userItemSchema)}
+        following(first:30 ${this.afterCursorString(cursor)} ) ${nodesPageSchema(userItemSchema)}
       }
     }`;
     return this.client.request(query).then(data=>{
@@ -119,10 +123,10 @@ export class ApiService {
     });
   }
 
-  getStarredRepos(login?:string):Promise<NodesPage<RepoItem>>{
+  getStarredRepos(login:string,cursor?:string):Promise<NodesPage<RepoItem>>{
     const query=`{
       ${this.userQueryString(login)} {
-    		starredRepositories(first:30) ${nodesPageSchema(repoItemSchema)}
+    		starredRepositories(first:30 ${this.afterCursorString(cursor)} ) ${nodesPageSchema(repoItemSchema)}
       }
     }`;
     return this.client.request(query).then(data=>{

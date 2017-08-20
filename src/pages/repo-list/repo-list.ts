@@ -13,16 +13,20 @@ import {RepoItem} from "../../classes/repo";
 abstract class RepoListPage {
   title:string='Repo List';
   repos:RepoItem[]=[];
+  login:string;
+
   constructor(
     protected navCtrl: NavController,
     protected navParams: NavParams,
     protected apiSvc: ApiService,
     protected loadingCtrl: LoadingController,
     protected toastSvc: ToastService,
-  ) {}
+  ) {
+    this.login=navParams.get('login');
+  }
 
   ionViewWillLoad() {
-    this.apiSvc.getStarredRepos().then((repos)=>{
+    this.apiSvc.getStarredRepos(this.login).then((repos)=>{
         Array.prototype.push.apply(this.repos,repos);
     });
   }
