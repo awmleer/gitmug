@@ -20,6 +20,7 @@ import {UserListPageModule} from "../pages/user-list/user-list.module";
 import {ToastService} from "../services/toast.service";
 import {RepoListPageModule} from "../pages/repo-list/repo-list.module";
 
+
 @NgModule({
   declarations: [
     MyApp,
@@ -40,10 +41,9 @@ import {RepoListPageModule} from "../pages/repo-list/repo-list.module";
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    AboutPage,
-    ContactPage,
-    HomePage,
     TabsPage,
+    AboutPage,
+    HomePage,
   ],
   providers: [
     StatusBar,

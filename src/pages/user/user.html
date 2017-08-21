@@ -73,10 +73,17 @@
     <ion-list-header>
       Pinned Repos
     </ion-list-header>
+    <!--<repo-list [repos]="userProfile.pinnedRepositories.nodes" [showOwnerLogin]="false"></repo-list>-->
+
     <ion-list>
+      <!--<repo-item *ngFor="let repo of userProfile.pinnedRepositories.nodes" [repo]="repo" [showOwnerLogin]="showOwnerLogin"></repo-item>-->
+
+       <!--(click)="viewRepo(repo)"-->
+
       <ion-item *ngFor="let repo of userProfile.pinnedRepositories.nodes">
-        <h2>{{repo.name}}</h2>
-        <p>{{repo.description}}</p>
+        <repo-item [repo]="repo" [showOwnerLogin]="false"></repo-item>
+        <!--<h2>{{repo.name}}</h2>-->
+        <!--<p>{{repo.description}}</p>-->
       </ion-item>
     </ion-list>
 

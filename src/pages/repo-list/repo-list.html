@@ -16,13 +16,9 @@
     </ion-list-header>
 
     <ion-list>
-      <button ion-item *ngFor="let repo of repos" (click)="viewRepo(repo)">
-        <h2>
-          <span *ngIf="showOwnerLogin">{{repo.owner.login}}/</span>{{repo.name}}
-        </h2>
-        <p>{{repo.description}}</p>
-        <p>{{repo.primaryLanguage?.name}}</p>
-      </button>
+      <ion-item *ngFor="let repo of repos">
+        <repo-item [repo]="repo" [showOwnerLogin]="showOwnerLogin"></repo-item>
+      </ion-item>
     </ion-list>
 
     <div class="list-end-footer" *ngIf="!pageInfo.hasNextPage">
