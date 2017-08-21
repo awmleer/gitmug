@@ -18,6 +18,7 @@ import {ToastService} from "../services/toast.service";
 import {RepoListPageModule} from "../pages/repo-list/repo-list.module";
 import {RepoPageModule} from "../pages/repo/repo.module";
 import {DashboardPageModule} from "../pages/dashboard/dashboard.module";
+import {BootstrapPageModule} from "../pages/bootstrap/bootstrap.module";
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import {DashboardPageModule} from "../pages/dashboard/dashboard.module";
     HttpModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
+    BootstrapPageModule,
     DashboardPageModule,
     UserPageModule,
     UserListPageModule,
