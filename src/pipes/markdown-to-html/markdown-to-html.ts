@@ -17,6 +17,7 @@ export class MarkdownToHtmlPipe implements PipeTransform {
     let html=m.parse(text);
     let dom=(new DOMParser()).parseFromString(html,'text/html');
     console.log(html);
+    //fix <img>
     let imgs=dom.getElementsByTagName('img');
     for(let i=0;i<imgs.length;i++){
       let img=imgs[i];
@@ -24,6 +25,11 @@ export class MarkdownToHtmlPipe implements PipeTransform {
         'src',
         img.getAttribute('src').replace(/\.\//,baseUrl+'/')
       );
+    }
+    //fix <a>
+    let aTags=dom.getElementsByTagName('a');
+    for(let i=0;i<aTags.length;i++){
+      aTags[i].removeAttribute('href');
     }
     return dom.getElementsByTagName('body')[0].innerHTML;
   }
