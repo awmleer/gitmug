@@ -3,4 +3,11 @@ repo-item {
     text-overflow: ellipsis;
     overflow: hidden;
   }
+  span.language-block{
+    display: inline-block;
+    width:1em;
+    height:1em;
+    position: relative;
+    top: 0.15em;
+  }
 }

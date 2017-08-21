@@ -2,5 +2,10 @@
   <span *ngIf="showOwnerLogin">{{repo.owner.login}}/</span>{{repo.name}}
 </h2>
 <p class="description">{{repo.description}}</p>
-<p>{{repo.primaryLanguage?.name}}</p>
+<p>
+  <span *ngIf="repo.primaryLanguage">
+    <span class="language-block" [style.background-color]="languageColor"></span>
+  {{repo.primaryLanguage.name}}
+  </span>
+</p>
 
