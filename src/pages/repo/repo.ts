@@ -17,6 +17,7 @@ export class RepoPage {
   ownerLogin:string;
   name:string;
   repo:RepoDetail;
+  readme:string;
 
   constructor(
     public navCtrl: NavController,
@@ -47,6 +48,7 @@ export class RepoPage {
         this.navCtrl.pop();
         this.toastSvc.toast('Fail to load repo info');
     }).then(()=>{
+      this.freshenRepoReadme();
       loading.dismiss();
     });
   }
@@ -74,6 +76,12 @@ export class RepoPage {
   viewWatchers(){
     this.navCtrl.push(WatchersPage,{
       repo: this.repoParam
+    });
+  }
+
+  freshenRepoReadme():Promise<null>{
+    return this.apiSvc.getRepoReadme(this.repoParam).then((readme:string)=>{
+      this.readme=readme;
     });
   }
 

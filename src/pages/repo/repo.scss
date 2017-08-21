@@ -27,12 +27,19 @@ page-repo {
     }
   }
   div.statistic{
-    padding:5px 15px 25px;
+    padding:5px 15px 10px;
     ion-col{
       text-align: center;
       b{
         font-size: 2rem;
       }
+    }
+  }
+  div.readme{
+    padding:1.2em;
+    markdown .markdown{
+      border: solid 1px #bfbfbf;
+      padding: 1em;
     }
   }
 }

@@ -48,7 +48,7 @@ export class ApiService {
   }
 
   private restfulGet(url:string,params?:object):Promise<Response>{
-    return this.http.get(CONST.apiUrl+url,{
+    return this.http.get(url,{
       params:params,
       headers:this.restfulHeaders
     }).toPromise();
@@ -65,7 +65,7 @@ export class ApiService {
 
 
   getReceivedEvents(username){
-    this.restfulGet(`/users/awmleer/received_events`).then((response)=>{
+    this.restfulGet(CONST.apiUrl+`/users/awmleer/received_events`).then((response)=>{
       console.log(response.json());
     });
   }
@@ -183,7 +183,7 @@ export class ApiService {
 
   getHotRepos():Promise<NodesPage<RepoItem>>{
     //TODO use api V4
-    return this.restfulGet('/search/repositories',{
+    return this.restfulGet(CONST.apiUrl+'/search/repositories',{
       'q':`created:>${moment().subtract(1,'months').format('YYYY-MM-DD')}`,
       'sort':'stars',
       'order':'desc'
@@ -239,7 +239,7 @@ export class ApiService {
   }
 
 
-  getRepo(ownerLogin:string,name:string):Promise<RepoDetail>{
+  getRepo(ownerLogin:string,name:string):Promise<RepoDetail>{//TODO refactor to RepoParam class
     const query=`{
       repository(owner: "${ownerLogin}", name: "${name}") ${repoDetailSchema}
     }`;
@@ -247,6 +247,22 @@ export class ApiService {
       return data['repository'];
     })
   }
+
+  getRepoReadme(repo:RepoParam):Promise<string>{
+    return this.restfulGet(CONST.rawUrl+`/${repo.owner}/${repo.name}/master/README.md`).then((response:Response)=>{
+      return response.text();
+    }).catch(()=>{
+      return null;
+    });
+  }
+
+  // getRepoReadmeUrl(repo:RepoParam):Promise<string>{
+  //   return this.restfulGet(CONST.apiUrl+`/repos/${repo.owner}/${repo.name}/readme`).then((response:Response)=>{
+  //     return response.json()['html_url'];
+  //   }).catch(()=>{
+  //     return null;
+  //   });
+  // }
 
 
 }

@@ -46,6 +46,10 @@
       </ion-row>
     </div>
 
+    <div class="readme" *ngIf="readme">
+      <markdown [text]="readme"></markdown>
+    </div>
+
   </div>
 
 </ion-content>

@@ -7,6 +7,9 @@
       "path": "/api",
       "proxyUrl": "https://api.github.com"
     },{
+      "path": "/raw",
+      "proxyUrl": "https://raw.githubusercontent.com"
+    },{
       "path": "/github",
       "proxyUrl": "https://github.com"
     }

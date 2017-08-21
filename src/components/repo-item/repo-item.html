@@ -8,10 +8,13 @@
     {{repo.primaryLanguage.name}}
   </span>
   <span *ngIf="repo.stargazers.totalCount>0" class="widget">
-    <ion-icon name="md-star"></ion-icon> {{repo.stargazers.totalCount}}
+    <ion-icon name="md-star"></ion-icon>
+    {{repo.stargazers.totalCount<1000?repo.stargazers.totalCount:(repo.stargazers.totalCount/1000).toFixed(1)+'k'}}
+    <!--TODO use a filter-->
   </span>
   <span *ngIf="repo.forks.totalCount>0" class="widget">
-    <ion-icon name="md-git-network"></ion-icon> {{repo.forks.totalCount}}
+    <ion-icon name="md-git-network"></ion-icon>
+    {{repo.forks.totalCount<1000?repo.forks.totalCount:(repo.forks.totalCount/1000).toFixed(1)+'k'}}
   </span>
 </p>
 
