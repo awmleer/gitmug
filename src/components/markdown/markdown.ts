@@ -6,8 +6,8 @@ import {Component, Input} from '@angular/core';
   templateUrl: 'markdown.html'
 })
 export class MarkdownComponent {
-
   @Input()text: string;
+  @Input()baseUrl: string;
 
   constructor() {}
 

@@ -47,7 +47,10 @@
     </div>
 
     <div class="readme" *ngIf="readme">
-      <markdown [text]="readme"></markdown>
+      <div class="header">
+        README
+      </div>
+      <markdown [text]="readme" [baseUrl]="markdownBaseUrl"></markdown>
     </div>
 
   </div>

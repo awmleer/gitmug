@@ -38,6 +38,10 @@ export class RepoPage {
     return color;
   }
 
+  get markdownBaseUrl():string{
+    return `https://github.com/${this.repo.owner.login}/${this.repo.name}/raw/master`;
+  }
+
   ionViewDidLoad() {
     let loading=this.loadingCtrl.create({
       spinner: 'dots',
