@@ -34,22 +34,30 @@ abstract class RepoListPage {
   }
 
   ionViewWillLoad() {
-    this.initRepos();
+    this.initRepos().catch(()=>{
+      this.navCtrl.pop();
+    });
   }
 
-  initRepos(){
+  startLoading(){
     let loading=this.loadingCtrl.create({
       spinner: 'dots',
       content: 'Loading'
     });
     loading.present();
-    this.appendRepos().then(()=>{
+    return loading;
+  }
+
+  initRepos():Promise<null>{
+    let loading=this.startLoading();
+    this.repos=[];
+    this.totalCount=0;
+    return this.appendRepos().then(()=>{
       loading.dismiss();
     }).catch(()=>{
-      this.navCtrl.pop();
-      loading.dismiss().then(()=>{
-        this.toastSvc.toast('Fail to load repos');
-      });
+      loading.dismiss();
+      this.toastSvc.toast('Fail to load repos');
+      throw new Error();
     });
   }
 
@@ -65,12 +73,10 @@ abstract class RepoListPage {
   abstract getRepos(cursor:string):Promise<NodesPage<RepoItem>>;
 
   viewRepo(repo:RepoItem){
-
-  }
-
-  doSearch(){
     //TODO
   }
+
+  doSearch(){}
 
 }
 
@@ -93,6 +99,8 @@ export class OwnedReposPage extends RepoListPage {
   }
 }
 
+
+
 export class HotReposPage extends RepoListPage {
   title='Hot Repos';
   showSearchBox=true;
@@ -103,6 +111,37 @@ export class HotReposPage extends RepoListPage {
   }
 
   doSearch(){
-    //TODO push search page
+    this.navCtrl.push(SearchReposPage,{
+      'searchText': this.searchText
+    });
   }
+}
+
+
+export class SearchReposPage extends RepoListPage {
+  title='Search Repos';
+  showSearchBox=true;
+  showOwnerLogin=true;
+
+  getRepos(){
+    return this.apiSvc.searchRepos(this.searchText);
+  }
+
+  initRepos(){
+    let loading=this.startLoading();
+    this.repos=[];
+    this.totalCount=0;
+    return this.appendRepos().then(()=>{
+      loading.dismiss();
+    }).catch(()=>{
+      loading.dismiss();
+      this.toastSvc.toast('Search failed');
+      throw new Error();
+    });
+  }
+
+  doSearch(){
+    this.initRepos().catch(()=>{});
+  }
+
 }

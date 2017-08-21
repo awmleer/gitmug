@@ -197,5 +197,24 @@ export class ApiService {
     });
   }
 
+  searchRepos(searchText:string):Promise<NodesPage<RepoItem>>{
+    const query=`{
+      search(type: REPOSITORY, first: 30, query: "${searchText}") {
+        totalCount: repositoryCount
+        pageInfo{
+          hasNextPage
+          endCursor
+        }
+        nodes{
+          ... on Repository ${repoItemSchema}
+        }
+      }
+    }`;
+    return this.client.request(query).then(data=>{
+      return data['search'];
+    });
+
+  }
+
 
 }

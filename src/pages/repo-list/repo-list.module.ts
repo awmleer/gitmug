@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import {HotReposPage, OwnedReposPage, StarredReposPage} from "./repo-list";
+import {HotReposPage, OwnedReposPage, SearchReposPage, StarredReposPage} from "./repo-list";
 import {ComponentsModule} from "../../components/components.module";
 
 @NgModule({
@@ -8,12 +8,14 @@ import {ComponentsModule} from "../../components/components.module";
     StarredReposPage,
     OwnedReposPage,
     HotReposPage,
+    SearchReposPage,
   ],
   imports: [
     ComponentsModule,
     IonicPageModule.forChild(StarredReposPage),
     IonicPageModule.forChild(OwnedReposPage),
     IonicPageModule.forChild(HotReposPage),
+    IonicPageModule.forChild(SearchReposPage),
   ],
 })
 export class RepoListPageModule {}
