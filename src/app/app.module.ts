@@ -19,6 +19,7 @@ import {UserPageModule} from "../pages/user/user.module";
 import {UserListPageModule} from "../pages/user-list/user-list.module";
 import {ToastService} from "../services/toast.service";
 import {RepoListPageModule} from "../pages/repo-list/repo-list.module";
+import {RepoPageModule} from "../pages/repo/repo.module";
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import {RepoListPageModule} from "../pages/repo-list/repo-list.module";
     UserPageModule,
     UserListPageModule,
     RepoListPageModule,
+    RepoPageModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
