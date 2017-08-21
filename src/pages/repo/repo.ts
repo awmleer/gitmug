@@ -4,6 +4,7 @@ import {ApiService} from "../../services/api.service";
 import {ToastService} from "../../services/toast.service";
 import {RepoDetail} from "../../classes/repo";
 import {colors} from "../../classes/language-color";
+import {StargazersPage} from "../user-list/user-list";
 
 
 
@@ -53,6 +54,15 @@ export class RepoPage {
   freshenRepoDetail():Promise<null>{
     return this.apiSvc.getRepo(this.ownerLogin,this.name).then((repo)=>{
       this.repo=repo;
+    });
+  }
+
+  viewStargazers(){
+    this.navCtrl.push(StargazersPage,{
+      repo:{
+        owner:this.repo.owner.login,
+        name:this.repo.name
+      }
     });
   }
 

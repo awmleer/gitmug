@@ -123,6 +123,17 @@ export class ApiService {
     });
   }
 
+  getStargazers(repo:{owner:string;name:string;},cursor?:string):Promise<NodesPage<UserItem>>{
+    const query=`{
+      repository(owner: "${repo.owner}", name: "${repo.name}") {
+        stargazers(first:30 ${this.afterCursorString(cursor)} ) ${nodesPageSchema(userItemSchema)}
+      }
+    }`;
+    return this.client.request(query).then(data=>{
+      return data['repository']['stargazers'];
+    });
+  }
+
   getStarredRepos(login:''|string,cursor?:string):Promise<NodesPage<RepoItem>>{
     const query=`{
       ${this.userQueryString(login)} {
