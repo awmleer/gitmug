@@ -1,0 +1,9 @@
+<div class="search-box" [class.focusing]="focusing">
+  <ion-icon name="search" class="search-icon"></ion-icon>
+  <input (focus)="focusing=true" (blur)="focusing=false" (change)="textChange.emit(text)" [(ngModel)]="text" class="search-input" placeholder="Search" type="search" autocomplete="off" autocorrect="off" spellcheck="false">
+  <button ion-button clear icon-only color="dark" [class.has-text]="text" class="action-button" mode="ios" (click)="actionButtonClicked()">
+    <ion-icon name="md-done-all"></ion-icon>
+  </button>
+</div>
+
+

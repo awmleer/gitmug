@@ -14,7 +14,9 @@ import {NodesPage, PageInfo} from "../../classes/nodes-page";
 abstract class RepoListPage {
   title:string='Repo List';
   showOwnerLogin:boolean=true;
+  showSearchBox:boolean=false;
 
+  searchText:string;
   totalCount:number;
   pageInfo:PageInfo;
   repos:RepoItem[]=[];
@@ -28,6 +30,7 @@ abstract class RepoListPage {
     protected toastSvc: ToastService,
   ) {
     this.login=navParams.get('login');
+    this.searchText=navParams.get('searchText')||'';
   }
 
   ionViewWillLoad() {

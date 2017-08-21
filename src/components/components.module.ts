@@ -1,15 +1,20 @@
 import { NgModule } from '@angular/core';
 import { RepoItemComponent } from './repo-item/repo-item';
 import {CommonModule} from "@angular/common";
+import {SearchBoxComponent} from "./search-box/search-box";
+import {IonicModule} from "ionic-angular";
 @NgModule({
 	declarations: [
-	  RepoItemComponent
+	  RepoItemComponent,
+    SearchBoxComponent,
   ],
 	imports: [
-	  CommonModule
+	  CommonModule,
+    IonicModule,
   ],
 	exports: [
-	  RepoItemComponent
+	  RepoItemComponent,
+    SearchBoxComponent,
   ]
 })
 export class ComponentsModule {}
