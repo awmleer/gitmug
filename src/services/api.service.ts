@@ -159,5 +159,43 @@ export class ApiService {
     });
   }
 
+  getHotRepos():Promise<NodesPage<RepoItem>>{
+    //TODO use api V4
+    return this.restfulGet('/search/repositories',{
+      'q':`created:>2017-08-01`,
+      'sort':'stars',
+      'order':'desc'
+    }).then((response:Response)=>{
+      let items = response.json()['items'];
+      let repos:RepoItem[]=[];
+      for(let i=0; i<items.length; i++){
+        if (i >= 30) break;
+        let item=items[i];
+        repos.push({
+          owner:{
+            login:item['owner']['login']
+          },
+          name:item['name'],
+          description:item['description'],
+          stargazers:{
+            totalCount:item['stargazers_count']
+          },
+          forks:{
+            totalCount:item['forks']
+          },
+          primaryLanguage:null
+        });
+      }
+      return {
+        totalCount:repos.length,
+        pageInfo:{
+          hasNextPage: false,
+          endCursor: null
+        },
+        nodes:repos
+      };
+    });
+  }
+
 
 }

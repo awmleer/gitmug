@@ -13,7 +13,7 @@ import {NodesPage, PageInfo} from "../../classes/nodes-page";
 })
 abstract class RepoListPage {
   title:string='Repo List';
-  showOwnerLogin:boolean=true;
+  showOwnerLogin:boolean=false;
   showSearchBox:boolean=false;
 
   searchText:string;
@@ -68,11 +68,16 @@ abstract class RepoListPage {
 
   }
 
+  doSearch(){
+    //TODO
+  }
+
 }
 
 
 export class StarredReposPage extends RepoListPage {
   title='Starred Repos';
+  showOwnerLogin=true;
 
   getRepos(cursor:string){
     return this.apiSvc.getStarredRepos(this.login,cursor);
@@ -82,9 +87,22 @@ export class StarredReposPage extends RepoListPage {
 
 export class OwnedReposPage extends RepoListPage {
   title='Owned Repos';
-  showOwnerLogin=false;
 
   getRepos(cursor:string){
     return this.apiSvc.getOwnedRepos(this.login,cursor);
+  }
+}
+
+export class HotReposPage extends RepoListPage {
+  title='Hot Repos';
+  showSearchBox=true;
+  showOwnerLogin=true;
+
+  getRepos(cursor:string){
+    return this.apiSvc.getHotRepos();
+  }
+
+  doSearch(){
+    //TODO push search page
   }
 }

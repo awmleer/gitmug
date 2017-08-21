@@ -10,7 +10,7 @@
 <ion-content>
 
   <div class="search-box-container" *ngIf="showSearchBox">
-    <search-box [(text)]="searchText"></search-box>
+    <search-box [(text)]="searchText" (doSearch)="doSearch()"></search-box>
   </div>
 
   <div *ngIf="totalCount>=0">
