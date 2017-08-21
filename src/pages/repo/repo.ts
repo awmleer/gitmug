@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import {IonicPage, LoadingController, NavController, NavParams} from 'ionic-angular';
 import {ApiService} from "../../services/api.service";
 import {ToastService} from "../../services/toast.service";
+import {RepoDetail} from "../../classes/repo";
+import {colors} from "../../classes/language-color";
 
 
 
@@ -13,6 +15,7 @@ import {ToastService} from "../../services/toast.service";
 export class RepoPage {
   ownerLogin:string;
   name:string;
+  repo:RepoDetail;
 
   constructor(
     public navCtrl: NavController,
@@ -25,13 +28,32 @@ export class RepoPage {
     this.name=navParams.get('name');
   }
 
+  get languageColor():string{
+    let color=colors[this.repo.primaryLanguage.name];
+    if (!color) {
+      color='#808080';
+    }
+    return color;
+  }
+
   ionViewDidLoad() {
     let loading=this.loadingCtrl.create({
       spinner: 'dots',
       content: 'Loading'
     });
     loading.present();
+    this.freshenRepoDetail().catch(()=>{
+        this.navCtrl.pop();
+        this.toastSvc.toast('Fail to load repo info');
+    }).then(()=>{
+      loading.dismiss();
+    });
+  }
 
+  freshenRepoDetail():Promise<null>{
+    return this.apiSvc.getRepo(this.ownerLogin,this.name).then((repo)=>{
+      this.repo=repo;
+    });
   }
 
 }

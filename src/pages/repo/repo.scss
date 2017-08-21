@@ -1,3 +1,38 @@
 page-repo {
-
+  div.meta{
+    padding:3rem 0 0;
+    text-align: center;
+    h2.name{
+      font-size: 3rem;
+    }
+    h3.login{
+      color: #9f9f9f;
+      font-size: 2rem;
+    }
+    p.widgets{
+      span.widget{
+        display: inline-block;
+        margin-right: 1.2em;
+      }
+      span.language-block{
+        display: inline-block;
+        width:1em;
+        height: 1em;
+        position: relative;
+        top:0.1em;
+      }
+    }
+    p.description{
+      font-size: 1.4rem;
+    }
+  }
+  div.statistic{
+    padding:5px 15px 25px;
+    ion-col{
+      text-align: center;
+      b{
+        font-size: 2rem;
+      }
+    }
+  }
 }

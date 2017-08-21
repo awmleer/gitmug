@@ -5,7 +5,7 @@ import {Headers, Http, Response} from "@angular/http";
 import 'rxjs/add/operator/toPromise';
 import {User, UserItem, UserProfile, userProfileSchema, userSchema, userItemSchema} from "../classes/user";
 import {NodesPage, nodesPageSchema} from "../classes/nodes-page";
-import {RepoItem, repoItemSchema} from "../classes/repo";
+import {RepoDetail, repoDetailSchema, RepoItem, repoItemSchema} from "../classes/repo";
 
 
 @Injectable()
@@ -214,6 +214,16 @@ export class ApiService {
       return data['search'];
     });
 
+  }
+
+
+  getRepo(ownerLogin:string,name:string):Promise<RepoDetail>{
+    const query=`{
+      repository(owner: "${ownerLogin}", name: "${name}") ${repoDetailSchema}
+    }`;
+    return this.client.request(query).then(data=>{
+      return data['repository'];
+    })
   }
 
 

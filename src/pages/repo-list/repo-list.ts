@@ -4,6 +4,7 @@ import {ToastService} from "../../services/toast.service";
 import {ApiService} from "../../services/api.service";
 import {RepoItem} from "../../classes/repo";
 import {NodesPage, PageInfo} from "../../classes/nodes-page";
+import {RepoPage} from "../repo/repo";
 
 
 @IonicPage()
@@ -73,7 +74,10 @@ abstract class RepoListPage {
   abstract getRepos(cursor:string):Promise<NodesPage<RepoItem>>;
 
   viewRepo(repo:RepoItem){
-    //TODO
+    this.navCtrl.push(RepoPage,{
+      'ownerLogin':repo.owner.login,
+      'name':repo.name
+    });
   }
 
   doSearch(){}

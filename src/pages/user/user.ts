@@ -4,6 +4,8 @@ import {ApiService} from "../../services/api.service";
 import {UserProfile} from "../../classes/user";
 import {FollowersPage, FollowingPage} from "../user-list/user-list";
 import {OwnedReposPage, StarredReposPage} from "../repo-list/repo-list";
+import {RepoItem} from "../../classes/repo";
+import {RepoPage} from "../repo/repo";
 
 
 
@@ -60,6 +62,13 @@ export class UserPage {
   viewStars(){
     this.navCtrl.push(StarredReposPage,{
       'login':this.userProfile.login
+    });
+  }
+
+  viewRepo(repo:RepoItem){
+    this.navCtrl.push(RepoPage,{
+      'ownerLogin':repo.owner.login,
+      'name':repo.name
     });
   }
 

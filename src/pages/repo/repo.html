@@ -9,4 +9,43 @@
 
 <ion-content>
 
+  <div *ngIf="repo">
+    <div class="meta">
+      <h3 class="login">{{repo.owner.login}}</h3>
+      <h2 class="name">{{repo.name}}</h2>
+      <p class="widgets">
+        <span *ngIf="repo.primaryLanguage" class="widget">
+          <span class="language-block" [style.background-color]="languageColor"></span>
+          {{repo.primaryLanguage.name}}
+        </span>
+        <span class="widget">
+          <ion-icon name="folder"></ion-icon>
+          {{repo.diskUsage}} KB
+        </span>
+      </p>
+      <p class="description">{{repo.description}}</p>
+    </div>
+
+    <div class="statistic">
+      <ion-row>
+        <ion-col>
+          <a (click)="viewStars()">
+            <b>{{repo.stargazers.totalCount}}</b><br>Stars
+          </a>
+        </ion-col>
+        <ion-col>
+          <a (click)="viewFollowers()">
+            <b>{{repo.forks.totalCount}}</b><br>Forks
+          </a>
+        </ion-col>
+        <ion-col>
+          <a (click)="viewFollowing()">
+            <b>{{repo.watchers.totalCount}}</b><br>Watches
+          </a>
+        </ion-col>
+      </ion-row>
+    </div>
+
+  </div>
+
 </ion-content>

@@ -75,9 +75,9 @@
     </ion-list-header>
 
     <ion-list>
-      <ion-item *ngFor="let repo of userProfile.pinnedRepositories.nodes">
+      <button ion-item *ngFor="let repo of userProfile.pinnedRepositories.nodes" (click)="viewRepo(repo)">
         <repo-item [repo]="repo" [showOwnerLogin]="false"></repo-item>
-      </ion-item>
+      </button>
     </ion-list>
 
   </div>

@@ -15,6 +15,26 @@ export class RepoItem {
   };
 }
 
+export class RepoDetail extends RepoItem {
+  watchers:{
+    totalCount:number;
+  };
+  isFork:boolean;
+  isPrivate:boolean;
+  isMirror:boolean;
+  diskUsage:number;
+  license:string;
+  repositoryTopics:{
+    nodes:{
+      topic:{
+        name:string;
+      }
+    }[];
+  };
+  viewerHasStarred:boolean;
+}
+
+
 export const repoItemSchema=`{
   owner{
     login
@@ -30,4 +50,38 @@ export const repoItemSchema=`{
   primaryLanguage{
     name
   }
+}`;
+
+export const repoDetailSchema=`{
+  name
+  owner {
+    login
+  }
+  description
+  stargazers {
+    totalCount
+  }
+  forks {
+    totalCount
+  }
+  primaryLanguage {
+    name
+  }
+  
+  watchers{
+    totalCount
+  }
+  isFork
+  isPrivate
+  isMirror
+  diskUsage
+  license
+  repositoryTopics(first:100){
+    nodes{
+      topic{
+        name
+      }
+    }
+  }
+  viewerHasStarred
 }`;

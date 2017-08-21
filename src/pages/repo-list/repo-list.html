@@ -20,9 +20,9 @@
     </ion-list-header>
 
     <ion-list>
-      <ion-item *ngFor="let repo of repos">
+      <button ion-item *ngFor="let repo of repos" (click)="viewRepo(repo)">
         <repo-item [repo]="repo" [showOwnerLogin]="showOwnerLogin"></repo-item>
-      </ion-item>
+      </button>
     </ion-list>
 
     <div class="list-end-footer" *ngIf="!pageInfo.hasNextPage">
