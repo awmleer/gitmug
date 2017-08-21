@@ -1,3 +1,5 @@
+import {RepoItem, repoItemSchema} from "./repo";
+
 export class User {
   name:string;
   login:string;
@@ -22,11 +24,7 @@ export class UserProfile extends UserItem {
     totalCount:number;
   };
   pinnedRepositories:{
-    nodes:[{
-      id:string;
-      name:string;
-      description:string;
-    }];
+    nodes:RepoItem[];
   };
   company:string;
   location:string;
@@ -63,11 +61,7 @@ export const userProfileSchema=`{
     totalCount
   }
   pinnedRepositories(first: 10){
-    nodes{
-      id,
-      name,
-      description
-    }
+    nodes ${repoItemSchema}
   }
   company
   location

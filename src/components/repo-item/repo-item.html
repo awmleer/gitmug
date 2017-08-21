@@ -3,9 +3,15 @@
 </h2>
 <p class="description">{{repo.description}}</p>
 <p>
-  <span *ngIf="repo.primaryLanguage">
+  <span *ngIf="repo.primaryLanguage" class="widget">
     <span class="language-block" [style.background-color]="languageColor"></span>
-  {{repo.primaryLanguage.name}}
+    {{repo.primaryLanguage.name}}
+  </span>
+  <span *ngIf="repo.stargazers.totalCount>0" class="widget">
+    <ion-icon name="md-star"></ion-icon> {{repo.stargazers.totalCount}}
+  </span>
+  <span *ngIf="repo.forks.totalCount>0" class="widget">
+    <ion-icon name="md-git-network"></ion-icon> {{repo.forks.totalCount}}
   </span>
 </p>
 
