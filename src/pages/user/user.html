@@ -21,7 +21,9 @@
     <div class="statistic">
       <ion-row>
         <ion-col>
-          <b>{{userProfile.repositories.totalCount}}</b><br>Repos
+          <a (click)="viewRepos()">
+            <b>{{userProfile.repositories.totalCount}}</b><br>Repos
+          </a>
         </ion-col>
         <ion-col>
           <a (click)="viewStars()">

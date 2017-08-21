@@ -13,6 +13,8 @@ import {NodesPage, PageInfo} from "../../classes/nodes-page";
 })
 abstract class RepoListPage {
   title:string='Repo List';
+  showOwnerLogin:boolean=true;
+
   totalCount:number;
   pageInfo:PageInfo;
   repos:RepoItem[]=[];
@@ -68,7 +70,18 @@ abstract class RepoListPage {
 
 export class StarredReposPage extends RepoListPage {
   title='Starred Repos';
+
   getRepos(cursor:string){
     return this.apiSvc.getStarredRepos(this.login,cursor);
+  }
+}
+
+
+export class OwnedReposPage extends RepoListPage {
+  title='Owned Repos';
+  showOwnerLogin=false;
+
+  getRepos(cursor:string){
+    return this.apiSvc.getOwnedRepos(this.login,cursor);
   }
 }

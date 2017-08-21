@@ -126,7 +126,10 @@ export class ApiService {
   getStarredRepos(login:''|string,cursor?:string):Promise<NodesPage<RepoItem>>{
     const query=`{
       ${this.userQueryString(login)} {
-    		starredRepositories(first:30 ${this.afterCursorString(cursor)} ) ${nodesPageSchema(repoItemSchema)}
+    		starredRepositories(first:30 ${this.afterCursorString(cursor)} , orderBy:{
+          field:STARRED_AT,
+          direction:DESC
+        }) ${nodesPageSchema(repoItemSchema)}
       }
     }`;
     return this.client.request(query).then(data=>{
@@ -134,6 +137,24 @@ export class ApiService {
         return data['user']['starredRepositories'];
       }else{
         return data['viewer']['starredRepositories'];
+      }
+    });
+  }
+
+  getOwnedRepos(login:''|string,cursor?:string):Promise<NodesPage<RepoItem>>{
+    const query=`{
+      ${this.userQueryString(login)} {
+    		repositories(first:30 ${this.afterCursorString(cursor)} , orderBy:{
+          field:UPDATED_AT,
+          direction:DESC
+        }) ${nodesPageSchema(repoItemSchema)}
+      }
+    }`;
+    return this.client.request(query).then(data=>{
+      if (login) {
+        return data['user']['repositories'];
+      }else{
+        return data['viewer']['repositories'];
       }
     });
   }

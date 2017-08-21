@@ -17,7 +17,9 @@
 
     <ion-list>
       <button ion-item *ngFor="let repo of repos" (click)="viewRepo(repo)">
-        <h2>{{repo.owner.login}}/{{repo.name}}</h2>
+        <h2>
+          <span *ngIf="showOwnerLogin">{{repo.owner.login}}/</span>{{repo.name}}
+        </h2>
         <p>{{repo.description}}</p>
         <p>{{repo.primaryLanguage?.name}}</p>
       </button>

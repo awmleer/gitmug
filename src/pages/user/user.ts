@@ -3,7 +3,7 @@ import {IonicPage, LoadingController, NavController, NavParams} from 'ionic-angu
 import {ApiService} from "../../services/api.service";
 import {UserProfile} from "../../classes/user";
 import {FollowersPage, FollowingPage} from "../user-list/user-list";
-import {StarredReposPage} from "../repo-list/repo-list";
+import {OwnedReposPage, StarredReposPage} from "../repo-list/repo-list";
 
 
 
@@ -74,6 +74,12 @@ export class MePage extends UserPage {
 
   viewStars(){
     this.navCtrl.push(StarredReposPage,{
+      'login':''
+    });
+  }
+
+  viewRepos(){
+    this.navCtrl.push(OwnedReposPage,{
       'login':''
     });
   }
