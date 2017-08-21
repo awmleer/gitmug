@@ -5,8 +5,8 @@ import {Headers, Http, Response} from "@angular/http";
 import 'rxjs/add/operator/toPromise';
 import {User, UserItem, UserProfile, userProfileSchema, userSchema, userItemSchema} from "../classes/user";
 import {NodesPage, nodesPageSchema} from "../classes/nodes-page";
-import {RepoDetail, repoDetailSchema, RepoItem, repoItemSchema} from "../classes/repo";
-
+import {RepoDetail, repoDetailSchema, RepoItem, repoItemSchema, RepoParam} from "../classes/repo";
+import * as moment from 'moment';
 
 @Injectable()
 export class ApiService {
@@ -123,7 +123,7 @@ export class ApiService {
     });
   }
 
-  getStargazers(repo:{owner:string;name:string;},cursor?:string):Promise<NodesPage<UserItem>>{
+  getStargazers(repo:RepoParam,cursor?:string):Promise<NodesPage<UserItem>>{
     const query=`{
       repository(owner: "${repo.owner}", name: "${repo.name}") {
         stargazers(first:30 ${this.afterCursorString(cursor)} ) ${nodesPageSchema(userItemSchema)}
@@ -131,6 +131,17 @@ export class ApiService {
     }`;
     return this.client.request(query).then(data=>{
       return data['repository']['stargazers'];
+    });
+  }
+
+  getWatchers(repo:RepoParam,cursor?:string):Promise<NodesPage<UserItem>>{
+    const query=`{
+      repository(owner: "${repo.owner}", name: "${repo.name}") {
+        watchers(first:30 ${this.afterCursorString(cursor)} ) ${nodesPageSchema(userItemSchema)}
+      }
+    }`;
+    return this.client.request(query).then(data=>{
+      return data['repository']['watchers'];
     });
   }
 
@@ -173,7 +184,7 @@ export class ApiService {
   getHotRepos():Promise<NodesPage<RepoItem>>{
     //TODO use api V4
     return this.restfulGet('/search/repositories',{
-      'q':`created:>2017-08-01`,
+      'q':`created:>${moment().subtract(1,'months').format('YYYY-MM-DD')}`,
       'sort':'stars',
       'order':'desc'
     }).then((response:Response)=>{

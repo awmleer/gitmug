@@ -83,6 +83,13 @@ export class StargazersPage extends UserListPage {
   }
 }
 
+export class WatchersPage extends UserListPage {
+  title='Watchers';
+  getUsers(cursor:string){
+    return this.apiSvc.getWatchers(this.navParams.get('repo'),cursor); // repo:{owner:string;name:string;}
+  }
+}
+
 export class FollowingPage extends UserListPage {
   title='Following';
 

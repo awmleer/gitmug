@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import {IonicPage, LoadingController, NavController, NavParams} from 'ionic-angular';
 import {ApiService} from "../../services/api.service";
 import {ToastService} from "../../services/toast.service";
-import {RepoDetail} from "../../classes/repo";
+import {RepoDetail, RepoParam} from "../../classes/repo";
 import {colors} from "../../classes/language-color";
-import {StargazersPage} from "../user-list/user-list";
+import {StargazersPage, WatchersPage} from "../user-list/user-list";
 
 
 
@@ -57,12 +57,23 @@ export class RepoPage {
     });
   }
 
+
+  get repoParam():RepoParam{
+    return {
+      owner:this.repo.owner.login,
+      name:this.repo.name
+    };
+  }
+
   viewStargazers(){
     this.navCtrl.push(StargazersPage,{
-      repo:{
-        owner:this.repo.owner.login,
-        name:this.repo.name
-      }
+      repo: this.repoParam
+    });
+  }
+
+  viewWatchers(){
+    this.navCtrl.push(WatchersPage,{
+      repo: this.repoParam
     });
   }
 

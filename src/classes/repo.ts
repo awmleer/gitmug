@@ -1,3 +1,8 @@
+export class RepoParam {
+  owner:string;
+  name:string;
+}
+
 export class RepoItem {
   owner:{
     login:string;
