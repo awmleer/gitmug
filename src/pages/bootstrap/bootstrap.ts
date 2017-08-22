@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {IonicPage, LoadingController, NavController} from 'ionic-angular';
+import {AccountService} from "../../services/account.service";
+import {ToastService} from "../../services/toast.service";
 
 
 @IonicPage()
@@ -10,12 +12,26 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class BootstrapPage {
 
   constructor(
-    public navCtrl: NavController,
-    public navParams: NavParams,
+    private navCtrl: NavController,
+    private accountSvc: AccountService,
+    private loadingCtrl: LoadingController,
+    private toastSvc: ToastService,
   ) {}
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad BootstrapPage');
+
+  auth(){
+    let loading=this.loadingCtrl.create({
+      spinner: 'dots',
+      content: 'Loading'
+    });
+    loading.present();
+    this.accountSvc.oAuth().then(()=>{
+      this.navCtrl.pop();
+    }).catch(()=>{
+      this.toastSvc.toast('Auth failed');
+    }).then(()=>{
+      loading.dismissAll();
+    });
   }
 
 }

@@ -57,8 +57,8 @@ export class AccountService {
     }
     browser.show();
     browser.on('loadstart').subscribe((event:InAppBrowserEvent)=>{
-      console.log(event);
-      console.log(event.url);
+      // console.log(event);
+      // console.log(event.url);
       if (event.url.indexOf('http://gitpub/oauth/callback/')!=-1) {
         browser.close();
         code=event.url.match(/code=\w+/)[0].replace('code=','');
@@ -89,15 +89,16 @@ export class AccountService {
       let accessToken=data['access_token'];
       this.apiSvc.setAccessToken(accessToken);
       this.storage.set('accessToken',accessToken);
-      console.log(accessToken);
+      // console.log(accessToken);
       return;
     });
   }
 
 
-  fetchAccessTokenFromStorage(){
+  fetchAccessTokenFromStorage():Promise<string>{
     return this.storage.get('accessToken').then(accessToken=>{
       this.apiSvc.setAccessToken(accessToken);
+      return accessToken;
     });
   }
 

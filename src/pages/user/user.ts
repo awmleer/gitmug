@@ -39,7 +39,7 @@ export class UserPage {
     this.getUserProfile().then((userProfile:UserProfile)=>{
       this.userProfile=userProfile;
       loading.dismiss();
-      console.log(this.userProfile);
+      // console.log(this.userProfile);
     });
   }
 

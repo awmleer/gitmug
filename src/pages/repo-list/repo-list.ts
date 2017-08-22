@@ -67,7 +67,7 @@ abstract class RepoListPage {
       this.totalCount=data.totalCount;
       this.pageInfo=data.pageInfo;
       Array.prototype.push.apply(this.repos,data.nodes);
-      console.log(this.repos);
+      // console.log(this.repos);
     });
   }
 

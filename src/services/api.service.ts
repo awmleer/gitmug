@@ -20,18 +20,6 @@ export class ApiService {
     this.client=new GraphQLClient(CONST.graphqlUrl);
   }
 
-  testQuery(){
-    const query=`{
-        viewer {
-          login
-          name
-        }
-      }`;
-    this.client.request(query).then(data => {
-      console.log(data);
-    });
-  }
-
   getAccessToken():string{
     return this.accessToken;
   }

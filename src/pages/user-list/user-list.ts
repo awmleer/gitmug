@@ -52,7 +52,7 @@ abstract class UserListPage {
       this.totalCount=data.totalCount;
       this.pageInfo=data.pageInfo;
       Array.prototype.push.apply(this.users,data.nodes);
-      console.log(this.users);
+      // console.log(this.users);
     });
   }
 
