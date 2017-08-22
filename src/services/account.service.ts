@@ -92,6 +92,7 @@ export class AccountService {
       this.user.accessToken=accessToken;
       this.userUpdated.emit();
       this.saveUserData();
+      this.freshUser();
       return;
     });
   }
