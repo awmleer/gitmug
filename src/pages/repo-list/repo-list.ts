@@ -7,12 +7,15 @@ import {NodesPage, PageInfo} from "../../classes/nodes-page";
 import {RepoPage} from "../repo/repo";
 
 
-@IonicPage()
+/**
+ * This is a base class
+ * **/
+ @IonicPage()
 @Component({
   selector: 'page-repo-list',
   templateUrl: 'repo-list.html',
 })
-abstract class RepoListPage {
+export class RepoListPage {
   title:string='Repo List';
   hideOwnerLogin:boolean=false;
   showSearchBox:boolean=false;
@@ -82,7 +85,9 @@ abstract class RepoListPage {
     });
   }
 
-  abstract getRepos(cursor:string):Promise<NodesPage<RepoItem>>;
+  getRepos(cursor:string):Promise<NodesPage<RepoItem>>{
+    return Promise.resolve(null);
+  }
 
   viewRepo(repo:RepoItem){
     this.navCtrl.push(RepoPage,{
@@ -95,76 +100,3 @@ abstract class RepoListPage {
 
 }
 
-
-export class StarredReposPage extends RepoListPage {
-  title='Starred Repos';
-
-  getRepos(cursor:string){
-    return this.apiSvc.getStarredRepos(this.login,cursor);
-  }
-}
-
-
-export class OwnedReposPage extends RepoListPage {
-  title='Owned Repos';
-  hideOwnerLogin=true;
-
-  getRepos(cursor:string){
-    return this.apiSvc.getOwnedRepos(this.login,cursor);
-  }
-}
-
-
-export class RepoForksPage extends RepoListPage {
-  title='Forks';
-
-  getRepos(cursor:string){
-    return this.apiSvc.getRepoForks(this.navParams.get('repoParam'),cursor);
-  }
-}
-
-
-
-export class HotReposPage extends RepoListPage {
-  title='Hot Repos';
-  showSearchBox=true;
-
-  getRepos(cursor:string){
-    return this.apiSvc.getHotRepos();
-  }
-
-  doSearch(){
-    this.navCtrl.push(SearchReposPage,{
-      'searchText': this.searchText
-    });
-  }
-}
-
-
-export class SearchReposPage extends RepoListPage {
-  title='Search Repos';
-  showSearchBox=true;
-  disableRefresher=true;
-
-  getRepos(){
-    return this.apiSvc.searchRepos(this.searchText);
-  }
-
-  initRepos(){
-    let loading=this.startLoading();
-    this.repos=[];
-    this.totalCount=0;
-    return this.appendRepos().then(()=>{
-      loading.dismiss();
-    }).catch(()=>{
-      loading.dismiss();
-      this.toastSvc.toast('Search failed');
-      throw new Error();
-    });
-  }
-
-  doSearch(){
-    this.initRepos().catch(()=>{});
-  }
-
-}

@@ -2,14 +2,15 @@ import { Component } from '@angular/core';
 import {IonicPage, LoadingController, NavController, NavParams} from 'ionic-angular';
 import {ApiService} from "../../services/api.service";
 import {UserProfile} from "../../classes/user";
-import {FollowersPage, FollowingPage} from "../user-list/user-list";
-import {OwnedReposPage, StarredReposPage} from "../repo-list/repo-list";
+import {FollowersPage} from "../user-list/followers";
+import {FollowingPage} from "../user-list/following";
 import {RepoItem} from "../../classes/repo";
 import {RepoPage} from "../repo/repo";
 import {ToastService} from "../../services/toast.service";
 import {SettingsPage} from "../settings/settings";
 import {UpdateService} from "../../services/update.service";
-
+import {StarredReposPage} from "../repo-list/starred-repos";
+import {OwnedReposPage} from "../repo-list/owned-repos";
 
 
 @IonicPage()
@@ -103,25 +104,3 @@ export class UserPage {
 
 }
 
-
-
-export class MePage extends UserPage {
-  showSettingsButton=true;
-
-  getUserProfile():Promise<UserProfile>{
-    return this.apiSvc.getMyProfile();
-  }
-
-  viewStars(){
-    this.navCtrl.push(StarredReposPage,{
-      'login':''
-    });
-  }
-
-  viewRepos(){
-    this.navCtrl.push(OwnedReposPage,{
-      'login':''
-    });
-  }
-
-}

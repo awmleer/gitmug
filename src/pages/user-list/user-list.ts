@@ -7,13 +7,15 @@ import {ToastService} from "../../services/toast.service";
 import {UserPage} from "../user/user";
 
 
-
+/**
+ * This is a base class
+ * **/
 @IonicPage()
 @Component({
   selector: 'page-user-list',
   templateUrl: 'user-list.html',
 })
-abstract class UserListPage {
+export class UserListPage {
   title='User List';
   users:UserItem[]=[];
   totalCount:number=-1;
@@ -68,7 +70,9 @@ abstract class UserListPage {
     });
   }
 
-  abstract getUsers(cursor:string):Promise<NodesPage<UserItem>>;
+  getUsers(cursor:string):Promise<NodesPage<UserItem>>{
+    return Promise.resolve(null);
+  }
 
   viewUser(user:UserItem){
     this.navCtrl.push(UserPage,{
@@ -77,37 +81,3 @@ abstract class UserListPage {
   }
 
 }
-
-
-export class FollowersPage extends UserListPage {
-  title='Followers';
-
-  getUsers(cursor:string){
-    return this.apiSvc.getFollowers(this.navParams.get('login'),cursor);
-  }
-
-}
-
-export class StargazersPage extends UserListPage {
-  title='Stargazers';
-  getUsers(cursor:string){
-    return this.apiSvc.getStargazers(this.navParams.get('repoParam'),cursor); // repo:{owner:string;name:string;}
-  }
-}
-
-export class WatchersPage extends UserListPage {
-  title='Watchers';
-  getUsers(cursor:string){
-    return this.apiSvc.getWatchers(this.navParams.get('repoParam'),cursor); // repo:{owner:string;name:string;}
-  }
-}
-
-export class FollowingPage extends UserListPage {
-  title='Following';
-
-  getUsers(cursor:string){
-    return this.apiSvc.getFollowing(this.navParams.get('login'),cursor);
-  }
-
-}
-

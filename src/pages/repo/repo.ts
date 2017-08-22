@@ -4,8 +4,9 @@ import {ApiService} from "../../services/api.service";
 import {ToastService} from "../../services/toast.service";
 import {RepoDetail, RepoParam} from "../../classes/repo";
 import {colors} from "../../classes/language-color";
-import {StargazersPage, WatchersPage} from "../user-list/user-list";
-import {RepoForksPage} from "../repo-list/repo-list";
+import {WatchersPage} from "../user-list/watchers";
+import {StargazersPage} from "../user-list/stargazers";
+import {RepoForksPage} from "../repo-list/repo-forks";
 
 
 
