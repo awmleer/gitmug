@@ -8,6 +8,7 @@ import {RepoItem} from "../../classes/repo";
 import {RepoPage} from "../repo/repo";
 import {ToastService} from "../../services/toast.service";
 import {SettingsPage} from "../settings/settings";
+import {UpdateService} from "../../services/update.service";
 
 
 
@@ -26,7 +27,8 @@ export class UserPage {
     protected navParams: NavParams,
     protected loadingCtrl: LoadingController,
     protected toastSvc: ToastService,
-    protected apiSvc: ApiService
+    public updateSvc: UpdateService,
+    protected apiSvc: ApiService,
   ) {}
 
 

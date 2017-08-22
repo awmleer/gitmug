@@ -6,6 +6,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { TabsPage } from '../pages/tabs/tabs';
 import {AccountService} from "../services/account.service";
 import {BootstrapPage} from "../pages/bootstrap/bootstrap";
+import {UpdateService} from "../services/update.service";
 
 @Component({
   templateUrl: 'app.html'
@@ -17,6 +18,7 @@ export class MyApp {
     platform: Platform,
     statusBar: StatusBar,
     accountSvc: AccountService,
+    updateSvc: UpdateService,
     modalCtrl: ModalController,
     splashScreen: SplashScreen,
   ) {
@@ -38,6 +40,10 @@ export class MyApp {
           });
         }
       });
+
+      setTimeout(()=>{
+        updateSvc.checkUpdate();
+      },3000);
 
     });
   }

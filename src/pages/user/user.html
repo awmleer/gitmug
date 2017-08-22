@@ -2,9 +2,12 @@
   <ion-navbar>
     <ion-title>User</ion-title>
     <ion-buttons end>
-      <button ion-button icon-only (click)="goSettingsPage()">
-        <ion-icon name="settings"></ion-icon>
-      </button>
+      <div *ngIf="showSettingsButton">
+        <ion-badge color="danger" *ngIf="updateSvc.hasNewVersion">New</ion-badge>
+        <button ion-button icon-only (click)="goSettingsPage()">
+          <ion-icon name="settings"></ion-icon>
+        </button>
+      </div>
     </ion-buttons>
   </ion-navbar>
 </ion-header>

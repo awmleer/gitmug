@@ -20,6 +20,7 @@ import {RepoPageModule} from "../pages/repo/repo.module";
 import {DashboardPageModule} from "../pages/dashboard/dashboard.module";
 import {BootstrapPageModule} from "../pages/bootstrap/bootstrap.module";
 import {SettingsPageModule} from "../pages/settings/settings.module";
+import {UpdateService} from "../services/update.service";
 
 
 @NgModule({
@@ -52,6 +53,7 @@ import {SettingsPageModule} from "../pages/settings/settings.module";
     ToastService,
     ApiService,
     AccountService,
+    UpdateService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
