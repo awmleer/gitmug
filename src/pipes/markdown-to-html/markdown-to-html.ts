@@ -22,7 +22,9 @@ export class MarkdownToHtmlPipe implements PipeTransform {
       let img=imgs[i];
       img.setAttribute(
         'src',
-        img.getAttribute('src').replace(/\.\//,baseUrl+'/')
+        img.getAttribute('src')
+          .replace(/^\.\//,baseUrl+'/')
+          .replace(/^\.\.\//,baseUrl+'/../')
       );
     }
     //fix <a>

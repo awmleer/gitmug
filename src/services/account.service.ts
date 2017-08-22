@@ -90,6 +90,7 @@ export class AccountService {
       let accessToken=data['access_token'];
       this.apiSvc.setAccessToken(accessToken);
       this.user.accessToken=accessToken;
+      this.userUpdated.emit();
       this.saveUserData();
       return;
     });
@@ -97,7 +98,6 @@ export class AccountService {
 
   saveUserData(){
     this.storage.set('user',this.user);
-    this.userUpdated.emit();
   }
 
   fetchUserDataFromStorage():Promise<null>{
@@ -106,6 +106,7 @@ export class AccountService {
         this.user.login=user.login;
         this.user.name=user.name;
         this.user.accessToken=user.accessToken;
+        this.userUpdated.emit();
         this.apiSvc.setAccessToken(this.user.accessToken);
       }
       return;
@@ -120,6 +121,7 @@ export class AccountService {
     return this.apiSvc.getViewer().then(user=>{
       this.user.login=user.login;
       this.user.name=user.name;
+      this.userUpdated.emit();
       this.saveUserData();
     });
   }

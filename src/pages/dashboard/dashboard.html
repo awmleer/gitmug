@@ -7,6 +7,28 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+
+  <ion-refresher pullMax="300" pullMin="70" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      refreshingSpinner="dots"
+      pullingIcon="ios-arrow-down">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <ion-list>
+    <ion-item *ngFor="let event of events">
+      <ion-avatar item-start>
+        <ion-icon [name]="eventIcon(event.type)"></ion-icon>
+      </ion-avatar>
+      <p>
+        <a *ngIf="event.actor" (click)="viewUser(event.actor.login)">{{event.actor.display_login}}</a> {{eventVerb(event)}} <a *ngIf="event.repo" (click)="viewRepo(event.repo.name)">{{event.repo.name}}</a>
+      </p>
+    </ion-item>
+  </ion-list>
+
+  <div class="empty-list-placeholder" *ngIf="!events.length">
+    <ion-icon name="ios-notifications-outline"></ion-icon>
+  </div>
 
 </ion-content>
