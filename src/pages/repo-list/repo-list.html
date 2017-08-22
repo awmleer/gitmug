@@ -20,7 +20,7 @@
     <search-box [(text)]="searchText" (doSearch)="doSearch()"></search-box>
   </div>
 
-  <div *ngIf="totalCount>0">
+  <div *ngIf="totalCount>=0">
 
     <ion-list-header>
       {{totalCount}} Repos
@@ -32,7 +32,11 @@
       </button>
     </ion-list>
 
-    <div class="list-end-footer" *ngIf="!pageInfo.hasNextPage">
+    <div class="empty-list-placeholder" *ngIf="totalCount==0">
+      <ion-icon name="ios-folder-open-outline"></ion-icon>
+    </div>
+
+    <div class="list-end-footer" *ngIf="!pageInfo.hasNextPage && totalCount>0">
       <span>End</span>
     </div>
 

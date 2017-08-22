@@ -30,3 +30,14 @@ div.list-end-footer{
   color: #6b6b6b;
 }
 
+div.empty-list-placeholder{
+  width:100%;
+  text-align: center;
+  margin-top: 8em;
+  ion-icon{
+    display: inline-block;
+    font-size: 6em;
+    color: #bfbfbf;
+  }
+}
+

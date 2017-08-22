@@ -79,6 +79,12 @@ export class UserPage {
     });
   }
 
+  viewRepos(){
+    this.navCtrl.push(OwnedReposPage,{
+      'login':this.userProfile.login
+    });
+  }
+
   viewRepo(repo:RepoItem){
     this.navCtrl.push(RepoPage,{
       'ownerLogin':repo.owner.login,

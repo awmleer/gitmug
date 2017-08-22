@@ -16,7 +16,7 @@ import {UserPage} from "../user/user";
 abstract class UserListPage {
   title='User List';
   users:UserItem[]=[];
-  totalCount:number;
+  totalCount:number=-1;
   pageInfo:PageInfo;
 
   constructor(
@@ -46,6 +46,9 @@ abstract class UserListPage {
       content: 'Loading'
     });
     loading.present();
+    this.users=[];
+    this.pageInfo=null;
+    this.totalCount=-1;
     return this.appendUsers().then(()=>{
       loading.dismiss();
     }).catch(()=>{

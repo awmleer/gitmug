@@ -19,7 +19,7 @@ abstract class RepoListPage {
   disableRefresher:boolean=false;
 
   searchText:string;
-  totalCount:number;
+  totalCount:number=-1;
   pageInfo:PageInfo;
   repos:RepoItem[]=[];
   login:string;
@@ -62,7 +62,8 @@ abstract class RepoListPage {
   initRepos():Promise<null>{
     let loading=this.startLoading();
     this.repos=[];
-    this.totalCount=0;
+    this.pageInfo=null;
+    this.totalCount=-1;
     return this.appendRepos().then(()=>{
       loading.dismiss();
     }).catch(()=>{
