@@ -14,8 +14,6 @@ import {StargazersPage, WatchersPage} from "../user-list/user-list";
   templateUrl: 'repo.html',
 })
 export class RepoPage {
-  ownerLogin:string;
-  name:string;
   repo:RepoDetail;
   readme:string;
 
@@ -25,10 +23,7 @@ export class RepoPage {
     protected apiSvc: ApiService,
     protected loadingCtrl: LoadingController,
     protected toastSvc: ToastService,
-  ) {
-    this.ownerLogin=navParams.get('ownerLogin');
-    this.name=navParams.get('name');
-  }
+  ) {}
 
   get languageColor():string{
     let color=colors[this.repo.primaryLanguage.name];
@@ -39,7 +34,7 @@ export class RepoPage {
   }
 
   get markdownBaseUrl():string{
-    return `https://github.com/${this.repo.owner.login}/${this.repo.name}/raw/master`;
+    return `https://github.com/${this.repoParam.owner}/${this.repoParam.name}/raw/master`;
   }
 
   ionViewDidLoad() {
@@ -50,24 +45,35 @@ export class RepoPage {
     loading.present();
     this.freshenRepoDetail().catch(()=>{
         this.navCtrl.pop();
-        this.toastSvc.toast('Fail to load repo info');
     }).then(()=>{
-      this.freshenRepoReadme();
       loading.dismiss();
     });
   }
 
+  doRefresh(refresher){
+    this.freshenRepoDetail().catch(()=>{
+      return;
+    }).then(()=>{
+      refresher.complete();
+    })
+  }
+
+
   freshenRepoDetail():Promise<null>{
-    return this.apiSvc.getRepo(this.ownerLogin,this.name).then((repo)=>{
+    this.freshenRepoReadme();
+    return this.apiSvc.getRepo(this.repoParam.owner,this.repoParam.name).then((repo)=>{
       this.repo=repo;
+    }).catch(() => {
+      this.toastSvc.toast('Fail to load repo info');
+      throw new Error();
     });
   }
 
 
   get repoParam():RepoParam{
     return {
-      owner:this.repo.owner.login,
-      name:this.repo.name
+      owner:this.navParams.get('ownerLogin'),
+      name:this.navParams.get('name')
     };
   }
 

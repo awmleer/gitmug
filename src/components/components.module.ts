@@ -5,6 +5,8 @@ import {SearchBoxComponent} from "./search-box/search-box";
 import {IonicModule} from "ionic-angular";
 import { MarkdownComponent } from './markdown/markdown';
 import {PipesModule} from "../pipes/pipes.module";
+
+
 @NgModule({
 	declarations: [
 	  RepoItemComponent,

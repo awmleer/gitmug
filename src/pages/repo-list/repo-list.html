@@ -9,6 +9,13 @@
 
 <ion-content>
 
+  <ion-refresher pullMax="300" pullMin="70" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      refreshingSpinner="dots"
+      pullingIcon="ios-arrow-down">
+    </ion-refresher-content>
+  </ion-refresher>
+
   <div class="search-box-container" *ngIf="showSearchBox">
     <search-box [(text)]="searchText" (doSearch)="doSearch()"></search-box>
   </div>

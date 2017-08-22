@@ -9,6 +9,13 @@
 
 <ion-content>
 
+  <ion-refresher pullMax="300" pullMin="70" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      refreshingSpinner="dots"
+      pullingIcon="ios-arrow-down">
+    </ion-refresher-content>
+  </ion-refresher>
+
   <div *ngIf="repo">
     <div class="meta">
       <h3 class="login">{{repo.owner.login}}</h3>
@@ -46,7 +53,7 @@
       </ion-row>
     </div>
 
-    <div class="readme" *ngIf="readme">
+    <div class="readme" *ngIf="readme" [hidden]="!repo">
       <div class="header">
         README
       </div>

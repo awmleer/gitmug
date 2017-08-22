@@ -40,6 +40,15 @@ abstract class RepoListPage {
     });
   }
 
+  doRefresh(refresher){
+    this.initRepos().catch(()=>{
+      return;
+    }).then(()=>{
+      refresher.complete();
+    })
+  }
+
+
   startLoading(){
     let loading=this.loadingCtrl.create({
       spinner: 'dots',

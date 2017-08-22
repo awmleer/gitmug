@@ -31,13 +31,22 @@ abstract class UserListPage {
     this.initUsers();
   }
 
-  initUsers(){
+  doRefresh(refresher){
+    this.initUsers().catch(()=>{
+      return;
+    }).then(()=>{
+      refresher.complete();
+    })
+  }
+
+
+  initUsers():Promise<null>{
     let loading=this.loadingCtrl.create({
       spinner: 'dots',
       content: 'Loading'
     });
     loading.present();
-    this.appendUsers().then(()=>{
+    return this.appendUsers().then(()=>{
       loading.dismiss();
     }).catch(()=>{
       this.navCtrl.pop();

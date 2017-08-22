@@ -6,6 +6,7 @@ import {FollowersPage, FollowingPage} from "../user-list/user-list";
 import {OwnedReposPage, StarredReposPage} from "../repo-list/repo-list";
 import {RepoItem} from "../../classes/repo";
 import {RepoPage} from "../repo/repo";
+import {ToastService} from "../../services/toast.service";
 
 
 
@@ -21,25 +22,38 @@ export class UserPage {
     protected navCtrl: NavController,
     protected navParams: NavParams,
     protected loadingCtrl: LoadingController,
+    protected toastSvc: ToastService,
     protected apiSvc: ApiService
   ) {}
 
 
   ionViewWillLoad(){
-    this.freshenUserProfile();
-  }
-
-
-  freshenUserProfile(){
     let loading=this.loadingCtrl.create({
       spinner: 'dots',
       content: 'Loading'
     });
     loading.present();
-    this.getUserProfile().then((userProfile:UserProfile)=>{
-      this.userProfile=userProfile;
+    this.freshenUserProfile().catch(()=>{
+      this.navCtrl.pop();
+    }).then(()=>{
       loading.dismiss();
-      // console.log(this.userProfile);
+    });
+  }
+
+  doRefresh(refresher){
+    this.freshenUserProfile().catch(()=>{
+      return;
+    }).then(()=>{
+      refresher.complete();
+    })
+  }
+
+  freshenUserProfile():Promise<null>{
+    return this.getUserProfile().then((userProfile:UserProfile)=>{
+      this.userProfile=userProfile;
+    }).catch(() => {
+      this.toastSvc.toast('Fail to load user profile');
+      throw new Error();
     });
   }
 
