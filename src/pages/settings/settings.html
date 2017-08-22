@@ -8,5 +8,22 @@
 
 
 <ion-content>
-
+  <div style="text-align: center;padding-bottom: 50px">
+    <img src="assets/logo/logo.svg" class="big-logo">
+    <p>
+      GitPub<br>
+      v{{version.major}}.{{version.minor}}.{{version.patch}}<br>
+      <br>
+    </p>
+    <p style="margin: 20px 0;" *ngIf="updateSvc.hasNewVersion">
+      Found a new release&nbsp;
+      <ion-badge color="danger">New</ion-badge>
+      <br>
+      v{{version.major}}.{{version.minor}}.{{version.patch}} -> v{{updateSvc.latestVersion.major}}.{{updateSvc.latestVersion.minor}}.{{updateSvc.latestVersion.patch}}<br>
+      <button (click)="update()" ion-button outline color="dark" small>Update now</button>
+    </p>
+    <button ion-button clear icon-left small color="dark" (click)="openGitHubLink()">
+      <ion-icon name="logo-github"></ion-icon>GitHub · awmleer/GitPub
+    </button>
+  </div>
 </ion-content>

@@ -8,4 +8,4 @@ export const CONST={
     minor:0,
     patch:0
   }
-}
+};
