@@ -26,14 +26,14 @@ export class MyApp {
       statusBar.styleDefault();
 
       accountSvc.fetchAccessTokenFromStorage().then((accessToken)=>{
-        // if (accessToken) {
-        //   splashScreen.hide();
-        //   accountSvc.freshUser();//TODO maybe don't need this
-        // }else {
+        if (accessToken) {
+          splashScreen.hide();
+          accountSvc.freshUser();//TODO maybe don't need this
+        }else {
           modalCtrl.create(BootstrapPage).present().then(()=>{
             splashScreen.hide();
           });
-        // }
+        }
       });
 
     });
