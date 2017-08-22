@@ -1,30 +1,44 @@
-This is a starter template for [Ionic](http://ionicframework.com/docs/) projects.
-
-## How to use this template
+# GitPub
 
 [![Join the chat at https://gitter.im/git_pub/Lobby](https://badges.gitter.im/git_pub/Lobby.svg)](https://gitter.im/git_pub/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-*This template does not work on its own*. The shared files for each starter are found in the [ionic2-app-base repo](https://github.com/ionic-team/ionic2-app-base).
+The GitHub app for minimalists.  [HomePage](https://awmleer.github.io/GitPub/index.html)
 
-To use this template, either create a new ionic project using the ionic node.js utility, or copy the files from this repository into the [Starter App Base](https://github.com/ionic-team/ionic2-app-base).
+![homepage screenshot](./screenshots/homepage.png)
 
-### With the Ionic CLI:
+## Overview
 
-Take the name after `ionic2-starter-`, and that is the name of the template to be used when using the `ionic start` command below:
+GitPub is built with [ionic](https://ionicframework.com/) framework (Angular+typescript+cordova), and uses GitHub api v4. Thanks to Angular's aot compilation, the iOS app/Android apk has an incredible small size (about 3~5M), while offering quite a few features.
+
+ Feel free to open issues if you find any bug or have any idea about GitPub.
+
+## Develop
+
+Preparation:
 
 ```bash
 $ sudo npm install -g ionic cordova
-$ ionic start myTabs tabs
+$ cd GitPub
+$ npm install
 ```
 
-Then, to run it, cd into `myTabs` and run:
+Start dev:
 
 ```bash
-$ ionic cordova platform add ios
-$ ionic cordova run ios
+$ ionic serve
 ```
 
-Substitute ios for android if not on a Mac.
+Build:
+
+```bash
+# iOS
+$ ionic cordova build ios --prod
+# Android
+$ ionic cordova build android --release --prod
+$ ./signApk.sh
+```
+
+## Commit Notation
 
 - [+] add
 - [-] remove
