@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {EventEmitter, Injectable} from '@angular/core';
 import {InAppBrowser, InAppBrowserEvent} from "@ionic-native/in-app-browser";
 import {Headers, Http, Response} from "@angular/http";
 import 'rxjs/add/operator/toPromise';
@@ -6,12 +6,13 @@ import {AlertController} from "ionic-angular";
 import {CONST} from "../app/const";
 import {Storage} from "@ionic/storage";
 import {ApiService} from "./api.service";
-import {User} from "../classes/user";
+import {UserStorage} from "../classes/user";
 
 
 @Injectable()
 export class AccountService {
-  user:User=null;
+  user:UserStorage=new UserStorage();
+  userUpdated:EventEmitter<null>=new EventEmitter<null>();
   // public accessToken:string;
 
   constructor(
@@ -88,17 +89,26 @@ export class AccountService {
       }
       let accessToken=data['access_token'];
       this.apiSvc.setAccessToken(accessToken);
-      this.storage.set('accessToken',accessToken);
-      // console.log(accessToken);
+      this.user.accessToken=accessToken;
+      this.saveUserData();
       return;
     });
   }
 
+  saveUserData(){
+    this.storage.set('user',this.user);
+    this.userUpdated.emit();
+  }
 
-  fetchAccessTokenFromStorage():Promise<string>{
-    return this.storage.get('accessToken').then(accessToken=>{
-      this.apiSvc.setAccessToken(accessToken);
-      return accessToken;
+  fetchUserDataFromStorage():Promise<null>{
+    return this.storage.get('user').then((user:UserStorage)=>{
+      if (user) {
+        this.user.login=user.login;
+        this.user.name=user.name;
+        this.user.accessToken=user.accessToken;
+        this.apiSvc.setAccessToken(this.user.accessToken);
+      }
+      return;
     });
   }
 
@@ -108,7 +118,9 @@ export class AccountService {
       throw new Error('No token');
     }
     return this.apiSvc.getViewer().then(user=>{
-      this.user=user;
+      this.user.login=user.login;
+      this.user.name=user.name;
+      this.saveUserData();
     });
   }
 

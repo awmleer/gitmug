@@ -52,9 +52,9 @@ export class ApiService {
   }
 
 
-  getReceivedEvents(username){
-    this.restfulGet(CONST.apiUrl+`/users/awmleer/received_events`).then((response)=>{
-      console.log(response.json());
+  getReceivedEvents(login):Promise<any[]>{
+    return this.restfulGet(CONST.apiUrl+`/users/${login}/received_events`).then((response)=>{
+      return response.json();
     });
   }
 

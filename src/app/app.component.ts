@@ -25,12 +25,15 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
 
-      accountSvc.fetchAccessTokenFromStorage().then((accessToken)=>{
-        if (accessToken) {
+      accountSvc.fetchUserDataFromStorage().then(()=>{
+        if (accountSvc.user.accessToken) {
           splashScreen.hide();
-          accountSvc.freshUser();//TODO maybe don't need this
+          accountSvc.freshUser();
         }else {
-          modalCtrl.create(BootstrapPage).present().then(()=>{
+          modalCtrl.create(BootstrapPage,{},{
+            enableBackdropDismiss:false,
+            showBackdrop:false
+          }).present().then(()=>{
             splashScreen.hide();
           });
         }
