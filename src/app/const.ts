@@ -5,7 +5,7 @@ export const CONST={
   githubUrl: window['cordova']?'https://github.com':'/github',
   version:{
     major:0,
-    minor:0,
+    minor:1,
     patch:0
   }
 };
