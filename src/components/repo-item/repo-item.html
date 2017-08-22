@@ -1,5 +1,6 @@
 <h2>
   <span *ngIf="showOwnerLogin">{{repo.owner.login}}/</span>{{repo.name}}
+  <ion-icon *ngIf="repo.isPrivate" name="lock"></ion-icon>
 </h2>
 <p class="description">{{repo.description}}</p>
 <p>
@@ -10,7 +11,6 @@
   <span *ngIf="repo.stargazers.totalCount>0" class="widget">
     <ion-icon name="md-star"></ion-icon>
     {{repo.stargazers.totalCount<1000?repo.stargazers.totalCount:(repo.stargazers.totalCount/1000).toFixed(1)+'k'}}
-    <!--TODO use a filter-->
   </span>
   <span *ngIf="repo.forks.totalCount>0" class="widget">
     <ion-icon name="md-git-network"></ion-icon>

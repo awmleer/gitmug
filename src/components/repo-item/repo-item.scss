@@ -4,6 +4,13 @@ repo-item {
     overflow: hidden;
     margin-bottom: 4px;
   }
+  h2{
+    ion-icon{
+      color: #5d5d5d;
+      display: inline-block;
+      margin:0 .2em;
+    }
+  }
   span.language-block{
     display: inline-block;
     width:1em;
