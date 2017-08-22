@@ -19,6 +19,7 @@ import {RepoListPageModule} from "../pages/repo-list/repo-list.module";
 import {RepoPageModule} from "../pages/repo/repo.module";
 import {DashboardPageModule} from "../pages/dashboard/dashboard.module";
 import {BootstrapPageModule} from "../pages/bootstrap/bootstrap.module";
+import {SettingsPageModule} from "../pages/settings/settings.module";
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import {BootstrapPageModule} from "../pages/bootstrap/bootstrap.module";
     UserListPageModule,
     RepoListPageModule,
     RepoPageModule,
+    SettingsPageModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [

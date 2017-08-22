@@ -7,6 +7,7 @@ import {OwnedReposPage, StarredReposPage} from "../repo-list/repo-list";
 import {RepoItem} from "../../classes/repo";
 import {RepoPage} from "../repo/repo";
 import {ToastService} from "../../services/toast.service";
+import {SettingsPage} from "../settings/settings";
 
 
 
@@ -16,6 +17,8 @@ import {ToastService} from "../../services/toast.service";
   templateUrl: 'user.html',
 })
 export class UserPage {
+  showSettingsButton:boolean=false;
+
   userProfile:UserProfile;
 
   constructor(
@@ -92,11 +95,17 @@ export class UserPage {
     });
   }
 
+  goSettingsPage(){
+    this.navCtrl.push(SettingsPage);
+  }
+
 }
 
 
 
 export class MePage extends UserPage {
+  showSettingsButton=true;
+
   getUserProfile():Promise<UserProfile>{
     return this.apiSvc.getMyProfile();
   }
