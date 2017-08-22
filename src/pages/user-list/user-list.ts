@@ -91,14 +91,14 @@ export class FollowersPage extends UserListPage {
 export class StargazersPage extends UserListPage {
   title='Stargazers';
   getUsers(cursor:string){
-    return this.apiSvc.getStargazers(this.navParams.get('repo'),cursor); // repo:{owner:string;name:string;}
+    return this.apiSvc.getStargazers(this.navParams.get('repoParam'),cursor); // repo:{owner:string;name:string;}
   }
 }
 
 export class WatchersPage extends UserListPage {
   title='Watchers';
   getUsers(cursor:string){
-    return this.apiSvc.getWatchers(this.navParams.get('repo'),cursor); // repo:{owner:string;name:string;}
+    return this.apiSvc.getWatchers(this.navParams.get('repoParam'),cursor); // repo:{owner:string;name:string;}
   }
 }
 

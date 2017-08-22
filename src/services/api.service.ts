@@ -169,6 +169,17 @@ export class ApiService {
     });
   }
 
+  getRepoForks(repo:RepoParam,cursor?:string):Promise<NodesPage<RepoItem>>{
+    const query=`{
+      repository(owner: "${repo.owner}", name: "${repo.name}") {
+        forks(first:30 ${this.afterCursorString(cursor)} ) ${nodesPageSchema(repoItemSchema)}
+      }
+    }`;
+    return this.client.request(query).then(data=>{
+      return data['repository']['forks'];
+    });
+  }
+
   getHotRepos():Promise<NodesPage<RepoItem>>{
     //TODO use api V4
     return this.restfulGet(CONST.apiUrl+'/search/repositories',{

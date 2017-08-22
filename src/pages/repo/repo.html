@@ -30,9 +30,21 @@
           <span class="language-block" [style.background-color]="languageColor"></span>
           {{repo.primaryLanguage.name}}
         </span>
-        <span class="widget">
+        <span class="widget" *ngIf="repo.diskUsage">
           <ion-icon name="folder"></ion-icon>
           {{repo.diskUsage}} KB
+        </span>
+        <span class="widget" *ngIf="repo.isPrivate">
+          <ion-icon name="lock"></ion-icon>
+          private
+        </span>
+        <span class="widget" *ngIf="repo.isFork">
+          <ion-icon name="git-network"></ion-icon>
+          fork
+        </span>
+        <span class="widget" *ngIf="repo.isMirror">
+          <ion-icon name="map"></ion-icon>
+          mirror
         </span>
       </p>
       <p class="description">{{repo.description}}</p>
@@ -46,7 +58,7 @@
           </a>
         </ion-col>
         <ion-col>
-          <a (click)="viewFollowers()">
+          <a (click)="viewForks()">
             <b>{{repo.forks.totalCount}}</b><br>Forks
           </a>
         </ion-col>

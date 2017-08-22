@@ -14,7 +14,7 @@ import {RepoPage} from "../repo/repo";
 })
 abstract class RepoListPage {
   title:string='Repo List';
-  showOwnerLogin:boolean=false;
+  hideOwnerLogin:boolean=false;
   showSearchBox:boolean=false;
   disableRefresher:boolean=false;
 
@@ -98,7 +98,6 @@ abstract class RepoListPage {
 
 export class StarredReposPage extends RepoListPage {
   title='Starred Repos';
-  showOwnerLogin=true;
 
   getRepos(cursor:string){
     return this.apiSvc.getStarredRepos(this.login,cursor);
@@ -108,9 +107,19 @@ export class StarredReposPage extends RepoListPage {
 
 export class OwnedReposPage extends RepoListPage {
   title='Owned Repos';
+  hideOwnerLogin=true;
 
   getRepos(cursor:string){
     return this.apiSvc.getOwnedRepos(this.login,cursor);
+  }
+}
+
+
+export class RepoForksPage extends RepoListPage {
+  title='Forks';
+
+  getRepos(cursor:string){
+    return this.apiSvc.getRepoForks(this.navParams.get('repoParam'),cursor);
   }
 }
 
@@ -119,7 +128,6 @@ export class OwnedReposPage extends RepoListPage {
 export class HotReposPage extends RepoListPage {
   title='Hot Repos';
   showSearchBox=true;
-  showOwnerLogin=true;
 
   getRepos(cursor:string){
     return this.apiSvc.getHotRepos();
@@ -136,7 +144,6 @@ export class HotReposPage extends RepoListPage {
 export class SearchReposPage extends RepoListPage {
   title='Search Repos';
   showSearchBox=true;
-  showOwnerLogin=true;
   disableRefresher=true;
 
   getRepos(){

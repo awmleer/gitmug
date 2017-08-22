@@ -28,7 +28,7 @@
 
     <ion-list>
       <button ion-item *ngFor="let repo of repos" (click)="viewRepo(repo)">
-        <repo-item [repo]="repo" [showOwnerLogin]="showOwnerLogin"></repo-item>
+        <repo-item [repo]="repo" [showOwnerLogin]="!hideOwnerLogin"></repo-item>
       </button>
     </ion-list>
 

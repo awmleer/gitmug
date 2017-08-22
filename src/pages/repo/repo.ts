@@ -5,6 +5,7 @@ import {ToastService} from "../../services/toast.service";
 import {RepoDetail, RepoParam} from "../../classes/repo";
 import {colors} from "../../classes/language-color";
 import {StargazersPage, WatchersPage} from "../user-list/user-list";
+import {RepoForksPage} from "../repo-list/repo-list";
 
 
 
@@ -79,13 +80,19 @@ export class RepoPage {
 
   viewStargazers(){
     this.navCtrl.push(StargazersPage,{
-      repo: this.repoParam
+      repoParam: this.repoParam
+    });
+  }
+
+  viewForks(){
+    this.navCtrl.push(RepoForksPage,{
+      repoParam: this.repoParam
     });
   }
 
   viewWatchers(){
     this.navCtrl.push(WatchersPage,{
-      repo: this.repoParam
+      repoParam: this.repoParam
     });
   }
 
