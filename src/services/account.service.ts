@@ -59,7 +59,7 @@ export class AccountService {
     browser.on('loadstart').subscribe((event:InAppBrowserEvent)=>{
       // console.log(event);
       // console.log(event.url);
-      if (event.url.indexOf('http://gitpub/oauth/callback/')!=-1) {
+      if (event.url.indexOf('https://awmleer.github.io/GitPub/oauth/callback.html')!=-1) {
         browser.close();
         code=event.url.match(/code=\w+/)[0].replace('code=','');
         let returnState=event.url.match(/state=\w+/)[0].replace('state=','');

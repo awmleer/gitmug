@@ -16,6 +16,7 @@ abstract class RepoListPage {
   title:string='Repo List';
   showOwnerLogin:boolean=false;
   showSearchBox:boolean=false;
+  disableRefresher:boolean=false;
 
   searchText:string;
   totalCount:number;
@@ -135,6 +136,7 @@ export class SearchReposPage extends RepoListPage {
   title='Search Repos';
   showSearchBox=true;
   showOwnerLogin=true;
+  disableRefresher=true;
 
   getRepos(){
     return this.apiSvc.searchRepos(this.searchText);

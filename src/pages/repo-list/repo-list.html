@@ -9,7 +9,7 @@
 
 <ion-content>
 
-  <ion-refresher pullMax="300" pullMin="70" (ionRefresh)="doRefresh($event)">
+  <ion-refresher *ngIf="!disableRefresher" pullMax="300" pullMin="70" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content
       refreshingSpinner="dots"
       pullingIcon="ios-arrow-down">
