@@ -193,6 +193,7 @@ export class ApiService {
           forks:{
             totalCount:item['forks']
           },
+          isPrivate:null,
           primaryLanguage:null
         });
       }

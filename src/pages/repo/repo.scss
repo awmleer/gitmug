@@ -1,4 +1,5 @@
 page-repo {
+
   div.meta{
     padding:3rem 20px 0;
     text-align: center;
@@ -8,6 +9,16 @@ page-repo {
     h3.login{
       color: #9f9f9f;
       font-size: 2rem;
+    }
+    p.topics{
+      span{
+        display: inline-block;
+        background-color: #959595;
+        margin:0.1em 0.25em;
+        padding: 0.2em 0.4em;
+        border-radius: 0.3em;
+        color: #ffffff;
+      }
     }
     p.widgets{
       span.widget{
@@ -26,6 +37,8 @@ page-repo {
       font-size: 1.4rem;
     }
   }
+
+
   div.statistic{
     padding:5px 15px 10px;
     ion-col{
@@ -35,6 +48,8 @@ page-repo {
       }
     }
   }
+
+
   div.readme{
     padding:1.2em;
     div.header{
@@ -47,4 +62,21 @@ page-repo {
       padding: 1em;
     }
   }
+
+
+  div.secondary{
+    padding:0 20px;
+    ion-col{
+      text-overflow: ellipsis;
+      overflow: hidden;
+      ion-icon{
+        display: inline-block;
+        width:1.1em;
+        position: relative;
+        top:0.05em;
+        color: #5d5d5d;
+      }
+    }
+  }
+
 }

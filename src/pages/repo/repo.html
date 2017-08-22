@@ -20,6 +20,11 @@
     <div class="meta">
       <h3 class="login">{{repo.owner.login}}</h3>
       <h2 class="name">{{repo.name}}</h2>
+      <p class="topics">
+        <span *ngFor="let topic of repo.repositoryTopics.nodes">
+          {{topic.topic.name}}
+        </span>
+      </p>
       <p class="widgets">
         <span *ngIf="repo.primaryLanguage" class="widget">
           <span class="language-block" [style.background-color]="languageColor"></span>
@@ -49,6 +54,31 @@
           <a (click)="viewWatchers()">
             <b>{{repo.watchers.totalCount}}</b><br>Watches
           </a>
+        </ion-col>
+      </ion-row>
+    </div>
+
+    <div class="secondary">
+      <ion-row>
+        <ion-col col-6>
+          <ion-icon name="alert"></ion-icon>
+          {{repo.issues.totalCount}} issues
+        </ion-col>
+        <ion-col col-6>
+          <ion-icon name="git-pull-request"></ion-icon>
+          {{repo.pullRequests.totalCount}} pull requests
+        </ion-col>
+        <ion-col col-6>
+          <ion-icon name="pricetags"></ion-icon>
+          {{repo.releases.totalCount}} releases
+        </ion-col>
+        <ion-col col-6>
+          <ion-icon name="document"></ion-icon>
+          {{repo.license?repo.license:'No license'}}
+        </ion-col>
+        <ion-col col-12>
+          <ion-icon name="time"></ion-icon>
+          Updated at {{repo.updatedAt}}
         </ion-col>
       </ion-row>
     </div>

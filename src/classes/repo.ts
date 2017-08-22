@@ -18,14 +18,24 @@ export class RepoItem {
   primaryLanguage:{
     name:string;
   };
+  isPrivate:boolean;
 }
 
 export class RepoDetail extends RepoItem {
   watchers:{
     totalCount:number;
   };
+  issues:{
+    totalCount:number;
+  };
+  pullRequests:{
+    totalCount:number;
+  };
+  releases:{
+    totalCount:number;
+  };
+  updatedAt:string;
   isFork:boolean;
-  isPrivate:boolean;
   isMirror:boolean;
   diskUsage:number;
   license:string;
@@ -55,6 +65,7 @@ export const repoItemSchema=`{
   primaryLanguage{
     name
   }
+  isPrivate
 }`;
 
 export const repoDetailSchema=`{
@@ -76,6 +87,16 @@ export const repoDetailSchema=`{
   watchers{
     totalCount
   }
+  issues {
+    totalCount
+  }
+  pullRequests {
+    totalCount
+  }
+  releases {
+    totalCount
+  }
+  updatedAt
   isFork
   isPrivate
   isMirror
