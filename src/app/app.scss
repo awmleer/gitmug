@@ -41,3 +41,17 @@ div.empty-list-placeholder{
   }
 }
 
+.label-ios{
+  margin: 11px 8px 11px 0;
+  display: block;
+  overflow: hidden;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  font-size: inherit;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+

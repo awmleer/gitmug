@@ -65,7 +65,7 @@ export class DashboardPage {
     if (this.accountSvc.user.login) {
       return this.apiSvc.getReceivedEvents(this.accountSvc.user.login).then(events=>{
         this.events=events;
-        console.log(this.events);
+        // console.log(this.events);
       });
     }else{
       return Promise.resolve();

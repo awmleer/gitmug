@@ -55,21 +55,35 @@ export class AccountService {
       });
 
       // code=window.prompt('Please input the code parameter in the new page');
+    }else{
+      browser.show();
+      return new Promise((resolve, reject) => {
+        let callbacksuccess=false;
+        browser.on('loadstart').subscribe((event:InAppBrowserEvent)=>{
+          // console.log(event);
+          // console.log(event.url);
+          if (event.url.indexOf('https://awmleer.github.io/GitPub/oauth/callback.html')!=-1) {
+            callbacksuccess=true;
+            browser.close();
+            code=event.url.match(/code=\w+/)[0].replace('code=','');
+            let returnState=event.url.match(/state=\w+/)[0].replace('state=','');
+            if (returnState != state) {
+              reject('State check fail');
+            }
+            this.obtainAccessToken(code,state).then(() => {
+              resolve();
+            });
+          }
+        });
+        browser.on('exit').subscribe(() => {
+          if (!callbacksuccess) {
+            reject('Window closed');
+          }
+        });
+      });
+
     }
-    browser.show();
-    browser.on('loadstart').subscribe((event:InAppBrowserEvent)=>{
-      // console.log(event);
-      // console.log(event.url);
-      if (event.url.indexOf('https://awmleer.github.io/GitPub/oauth/callback.html')!=-1) {
-        browser.close();
-        code=event.url.match(/code=\w+/)[0].replace('code=','');
-        let returnState=event.url.match(/state=\w+/)[0].replace('state=','');
-        if (returnState != state) {
-          throw new Error('State check fail');
-        }
-        return this.obtainAccessToken(code,state);
-      }
-    });
+
   }
 
 

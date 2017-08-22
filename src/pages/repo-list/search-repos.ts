@@ -18,7 +18,8 @@ export class SearchReposPage extends RepoListPage {
   initRepos(){
     let loading=this.startLoading();
     this.repos=[];
-    this.totalCount=0;
+    this.pageInfo=null;
+    this.totalCount=-1;
     return this.appendRepos().then(()=>{
       loading.dismiss();
     }).catch(()=>{
