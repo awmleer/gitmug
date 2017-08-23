@@ -8,6 +8,9 @@
           <ion-icon name="settings"></ion-icon>
         </button>
       </div>
+      <button ion-button outline *ngIf="userProfile?.viewerCanFollow" (click)="toggleFollow()" [disabled]="togglingFollow">
+        {{userProfile.viewerIsFollowing?'Unfollow':'Follow'}}
+      </button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>

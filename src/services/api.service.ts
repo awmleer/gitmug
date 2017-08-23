@@ -285,6 +285,21 @@ export class ApiService {
     return this.starMutation('remove',starrabledId);
   }
 
+
+  followUser(login:string):Promise<null>{
+    let headers=new Headers(this.restfulHeaders);
+    headers.set('Content-Length','zero');
+    return this.http.put(CONST.apiUrl+`/user/following/${login}`,'',{
+      headers:headers
+    }).toPromise();
+  }
+
+  unfollowUser(login:string):Promise<null>{
+    return this.http.delete(CONST.apiUrl+`/user/following/${login}`,{
+      headers:this.restfulHeaders
+    }).toPromise();
+  }
+
   // getRepoReadmeUrl(repo:RepoParam):Promise<string>{
   //   return this.restfulGet(CONST.apiUrl+`/repos/${repo.owner}/${repo.name}/readme`).then((response:Response)=>{
   //     return response.json()['html_url'];

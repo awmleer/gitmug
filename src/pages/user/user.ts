@@ -22,6 +22,7 @@ export class UserPage {
   showSettingsButton:boolean=false;
 
   userProfile:UserProfile;
+  togglingFollow:boolean=false;
 
   constructor(
     protected navCtrl: NavController,
@@ -100,6 +101,24 @@ export class UserPage {
 
   goSettingsPage(){
     this.navCtrl.push(SettingsPage);
+  }
+
+  toggleFollow(){
+    if (this.userProfile.viewerIsFollowing) {
+      this.togglingFollow=true;
+      this.apiSvc.unfollowUser(this.userProfile.login).then(() => {
+        this.userProfile.viewerIsFollowing=false;
+        this.userProfile.followers.totalCount-=1;
+        this.togglingFollow=false;
+      });
+    }else{
+      this.togglingFollow=true;
+      this.apiSvc.followUser(this.userProfile.login).then(() => {
+        this.userProfile.viewerIsFollowing=true;
+        this.userProfile.followers.totalCount+=1;
+        this.togglingFollow=false;
+      });
+    }
   }
 
 }

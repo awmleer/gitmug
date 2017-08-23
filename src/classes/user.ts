@@ -34,6 +34,8 @@ export class UserProfile extends UserItem {
   company:string;
   location:string;
   email:string;
+  viewerCanFollow:boolean;
+  viewerIsFollowing:boolean;
 }
 
 export const userSchema=`{
@@ -71,4 +73,6 @@ export const userProfileSchema=`{
   company
   location
   email
+  viewerCanFollow
+  viewerIsFollowing
 }`;
