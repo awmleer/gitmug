@@ -3,6 +3,7 @@ import {AlertController, IonicPage, NavController, NavParams, Platform} from 'io
 import {CONST} from "../../app/const";
 import {InAppBrowser} from "@ionic-native/in-app-browser";
 import {UpdateService} from "../../services/update.service";
+import {AccountService} from "../../services/account.service";
 
 
 
@@ -19,6 +20,7 @@ export class SettingsPage {
     private navParams: NavParams,
     private platform: Platform,
     private alertCtrl: AlertController,
+    private accountSvc: AccountService,
     private inAppBrowser: InAppBrowser,
     public updateSvc: UpdateService,
   ) {}
@@ -37,6 +39,21 @@ export class SettingsPage {
         buttons: ['OK']
       }).present();
     }
+  }
+
+  logout(){
+    this.accountSvc.logout().then(() => {
+      this.alertCtrl.create({
+        title: 'Log out',
+        subTitle: 'Logged out successfully. Please reopen GitMug.',
+        buttons: [{
+          text: 'OK',
+          handler: data => {
+            this.platform.exitApp();
+          }
+        }]
+      }).present();
+    });
   }
 
 

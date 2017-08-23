@@ -1,8 +1,8 @@
 {
   "name": "GitMug",
-  "version": "0.0.1",
-  "author": "awmleer",
-  "homepage": "http://ionicframework.com/",
+  "version": "0.0.0",
+  "author": "GitMug",
+  "homepage": "https://awmleer.github.io/GitMug",
   "private": true,
   "scripts": {
     "clean": "ionic-app-scripts clean",

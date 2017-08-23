@@ -111,8 +111,8 @@ export class AccountService {
     });
   }
 
-  saveUserData(){
-    this.storage.set('user',this.user);
+  saveUserData():Promise<null>{
+    return this.storage.set('user',this.user);
   }
 
   fetchUserDataFromStorage():Promise<null>{
@@ -139,6 +139,13 @@ export class AccountService {
       this.userUpdated.emit();
       this.saveUserData();
     });
+  }
+
+
+  logout():Promise<null>{
+    this.user=new UserStorage();
+    this.userUpdated.emit();
+    return this.saveUserData();
   }
 
 
