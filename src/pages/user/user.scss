@@ -4,8 +4,11 @@ page-user, page-me {
     text-align: center;
     img.big-avatar{
       border-radius: 1rem;
-      width:30%;
+      width:30vw;
+      height:30vw;
+      background-color: #ffffff;
       max-width:150px;
+      max-height: 150px;
       box-shadow: 0 0 10px 5px rgba(158, 158, 158, 0.1);
     }
     h2.name{

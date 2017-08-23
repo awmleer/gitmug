@@ -36,6 +36,11 @@ $ ionic cordova build android --release --prod
 $ ./signApk.sh
 ```
 
+IMPORTANT:
+
+If you change the html template, you may need to stop&restart to see the update. (This may be caused by page class inheritance, eg. UserPage & RepoListPage)
+
+
 ## Commit Notation
 
 - [+] add

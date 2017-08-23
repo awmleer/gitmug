@@ -68,33 +68,34 @@
           <ion-icon name="people"></ion-icon>
         </ion-avatar>
         <h2>Company</h2>
-        <p>{{userProfile.company}}</p>
+        <p>{{userProfile.company?userProfile.company:'Unknown'}}</p>
       </ion-item>
       <ion-item>
         <ion-avatar item-start>
           <ion-icon name="navigate"></ion-icon>
         </ion-avatar>
         <h2>Location</h2>
-        <p>{{userProfile.location}}</p>
+        <p>{{userProfile.location?userProfile.location:'Unknown'}}</p>
       </ion-item>
       <ion-item>
         <ion-avatar item-start>
           <ion-icon name="mail"></ion-icon>
         </ion-avatar>
         <h2>Email</h2>
-        <p>{{userProfile.email}}</p>
+        <p>{{userProfile.email?userProfile.email:'Unknown'}}</p>
       </ion-item>
     </ion-list>
 
-    <ion-list-header>
-      Pinned Repos
-    </ion-list-header>
-
-    <ion-list>
-      <button ion-item *ngFor="let repo of userProfile.pinnedRepositories.nodes" (click)="viewRepo(repo)">
-        <repo-item [repo]="repo" [showOwnerLogin]="false"></repo-item>
-      </button>
-    </ion-list>
+    <div *ngIf="userProfile.pinnedRepositories.nodes.length>0">
+      <ion-list-header>
+        Pinned Repos
+      </ion-list-header>
+      <ion-list >
+        <button ion-item *ngFor="let repo of userProfile.pinnedRepositories.nodes" (click)="viewRepo(repo)">
+          <repo-item [repo]="repo" [showOwnerLogin]="false"></repo-item>
+        </button>
+      </ion-list>
+    </div>
 
   </div>
 
