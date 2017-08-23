@@ -24,7 +24,7 @@ export class SettingsPage {
   ) {}
 
   openGitHubLink(){
-    this.inAppBrowser.create('https://github.com/awmleer/GitPub','_system');
+    this.inAppBrowser.create('https://github.com/awmleer/GitMug','_system');
   }
 
   update(){

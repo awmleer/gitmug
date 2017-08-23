@@ -1,1 +1,1 @@
-jarsigner -verbose -keystore gitpub.keystore -signedjar GitPub.apk platforms/android/build/outputs/apk/android-release-unsigned.apk gitpub.keystore
+jarsigner -verbose -keystore gitmug.keystore -signedjar GitMug.apk platforms/android/build/outputs/apk/android-release-unsigned.apk gitmug.keystore

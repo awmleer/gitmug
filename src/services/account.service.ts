@@ -29,7 +29,7 @@ export class AccountService {
     for (let i = 0; i < 10; i++){
       state += possible.charAt(Math.floor(Math.random() * possible.length));
     }
-    const browser=this.inAppBrowser.create(`https://github.com/login/oauth/authorize?client_id=ca1ddf99e44c2e6cb787&redirect_uri=https%3A%2F%2Fawmleer.github.io%2FGitPub%2Foauth%2Fcallback.html&scope=user%20public_repo%20repo%20delete_repo%20notifications%20gist%20read:org%20read:public_key%20read:gpg_key&state=${state}`,'_blank');
+    const browser=this.inAppBrowser.create(`https://github.com/login/oauth/authorize?client_id=ca1ddf99e44c2e6cb787&redirect_uri=https%3A%2F%2Fawmleer.github.io%2FGitMug%2Foauth%2Fcallback.html&scope=user%20public_repo%20repo%20delete_repo%20notifications%20gist%20read:org%20read:public_key%20read:gpg_key&state=${state}`,'_blank');
     let code:string;
     if (!window['cordova']) {
       return new Promise(resolve => {
@@ -62,7 +62,7 @@ export class AccountService {
         browser.on('loadstart').subscribe((event:InAppBrowserEvent)=>{
           // console.log(event);
           // console.log(event.url);
-          if (event.url.indexOf('https://awmleer.github.io/GitPub/oauth/callback.html')!=-1) {
+          if (event.url.indexOf('https://awmleer.github.io/GitMug/oauth/callback.html')!=-1) {
             callbacksuccess=true;
             browser.close();
             code=event.url.match(/code=\w+/)[0].replace('code=','');
@@ -89,7 +89,7 @@ export class AccountService {
 
   obtainAccessToken(code,state):Promise<null>{
     return this.http.post(`${CONST.githubUrl}/login/oauth/access_token`,
-      `client_id=ca1ddf99e44c2e6cb787&client_secret=61335ff161c4c0fda8fbf68beb0e1bee55380414&code=${code}&redirect_uri=https%3A%2F%2Fawmleer.github.io%2FGitPub%2Foauth%2Fcallback.html&state=${state}`,
+      `client_id=ca1ddf99e44c2e6cb787&client_secret=61335ff161c4c0fda8fbf68beb0e1bee55380414&code=${code}&redirect_uri=https%3A%2F%2Fawmleer.github.io%2FGitMug%2Foauth%2Fcallback.html&state=${state}`,
       {
         headers: new Headers({
           'Accept':'application/json',

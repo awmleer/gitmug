@@ -15,7 +15,7 @@ export class UpdateService {
   ) {}
 
   checkUpdate():Promise<boolean>{
-    return this.http.get(CONST.rawUrl+`/awmleer/GitPub/release/version.json?t=${Date.now()}`).toPromise().then((response:Response)=>{
+    return this.http.get(CONST.rawUrl+`/awmleer/GitMug/release/version.json?t=${Date.now()}`).toPromise().then((response:Response)=>{
       this.latestVersion=response.json();
       this.hasNewVersion=(
         (this.latestVersion.major > CONST.version.major)||
@@ -28,7 +28,7 @@ export class UpdateService {
 
   get androidDownloadLink(){
     let versionString=`${this.latestVersion.major}.${this.latestVersion.minor}.${this.latestVersion.patch}`;
-    return `https://github.com/awmleer/GitPub/releases/download/v${versionString}/GitPub${versionString}.apk`;
+    return `https://github.com/awmleer/GitMug/releases/download/v${versionString}/GitMug${versionString}.apk`;
   }
 
 
