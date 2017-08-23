@@ -18,6 +18,7 @@ import {RepoForksPage} from "../repo-list/repo-forks";
 export class RepoPage {
   repo:RepoDetail;
   readme:string;
+  togglingStar:boolean=false;
 
   constructor(
     public navCtrl: NavController,
@@ -101,6 +102,24 @@ export class RepoPage {
     return this.apiSvc.getRepoReadme(this.repoParam).then((readme:string)=>{
       this.readme=readme;
     });
+  }
+
+  toggleStar(){
+    if (this.repo.viewerHasStarred) {
+      this.togglingStar=true;
+      this.apiSvc.removeStar(this.repo.id).then(() => {
+        this.repo.viewerHasStarred=false;
+        this.repo.stargazers.totalCount-=1;
+        this.togglingStar=false;
+      });
+    }else{
+      this.togglingStar=true;
+      this.apiSvc.addStar(this.repo.id).then(() => {
+        this.repo.viewerHasStarred=true;
+        this.repo.stargazers.totalCount+=1;
+        this.togglingStar=false;
+      });
+    }
   }
 
 }

@@ -256,6 +256,35 @@ export class ApiService {
     });
   }
 
+  starMutation(action:'add'|'remove',starrableId:string):Promise<null>{
+    let mutationId:string='';
+    let possible="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    for (let i = 0; i < 10; i++){
+      mutationId += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
+    const query=`mutation{
+      ${action}Star(input:{
+        clientMutationId: "${mutationId}"
+        starrableId: "${starrableId}"
+      }){
+        clientMutationId
+      }
+    }`;
+    return this.client.request(query).then(data=>{
+      if (data[`${action}Star`]['clientMutationId']!=mutationId) {
+        throw new Error('ClientMutationId check failed');
+      }
+    });
+  }
+
+  addStar(starrableId:string):Promise<null>{
+    return this.starMutation('add',starrableId);
+  }
+
+  removeStar(starrabledId:string):Promise<null>{
+    return this.starMutation('remove',starrabledId);
+  }
+
   // getRepoReadmeUrl(repo:RepoParam):Promise<string>{
   //   return this.restfulGet(CONST.apiUrl+`/repos/${repo.owner}/${repo.name}/readme`).then((response:Response)=>{
   //     return response.json()['html_url'];

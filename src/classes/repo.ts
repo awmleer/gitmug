@@ -22,6 +22,7 @@ export class RepoItem {
 }
 
 export class RepoDetail extends RepoItem {
+  id:string;
   watchers:{
     totalCount:number;
   };
@@ -84,6 +85,7 @@ export const repoDetailSchema=`{
     name
   }
   
+  id
   watchers{
     totalCount
   }

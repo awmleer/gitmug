@@ -1,9 +1,12 @@
 <ion-header>
-
   <ion-navbar>
     <ion-title>Repo</ion-title>
+    <ion-buttons end>
+      <button [disabled]="togglingStar" ion-button icon-only (click)="toggleStar()" *ngIf="repo">
+        <ion-icon [name]="repo.viewerHasStarred?'md-star':'md-star-outline'"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
-
 </ion-header>
 
 
