@@ -300,6 +300,14 @@ export class ApiService {
     }).toPromise();
   }
 
+  getContent(owner:string,repo:string,path:string):Promise<null>{
+    return this.http.get(`/repos/${owner}/${repo}/contents${path}`,{
+      headers:this.restfulHeaders
+    }).toPromise().then(() => {
+
+    });
+  }
+
   // getRepoReadmeUrl(repo:RepoParam):Promise<string>{
   //   return this.restfulGet(CONST.apiUrl+`/repos/${repo.owner}/${repo.name}/readme`).then((response:Response)=>{
   //     return response.json()['html_url'];
