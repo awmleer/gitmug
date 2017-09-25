@@ -21,6 +21,7 @@ import {DashboardPageModule} from "../pages/dashboard/dashboard.module";
 import {BootstrapPageModule} from "../pages/bootstrap/bootstrap.module";
 import {SettingsPageModule} from "../pages/settings/settings.module";
 import {UpdateService} from "../services/update.service";
+import {ContentListPageModule} from "../pages/content-list/content-list.module";
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import {UpdateService} from "../services/update.service";
     UserPageModule,
     UserListPageModule,
     RepoListPageModule,
+    ContentListPageModule,
     RepoPageModule,
     SettingsPageModule,
   ],
