@@ -7,6 +7,7 @@ import {User, UserItem, UserProfile, userProfileSchema, userSchema, userItemSche
 import {NodesPage, nodesPageSchema} from "../classes/nodes-page";
 import {RepoDetail, repoDetailSchema, RepoItem, repoItemSchema, RepoParam} from "../classes/repo";
 import * as moment from 'moment';
+import {Content} from "../classes/content";
 
 @Injectable()
 export class ApiService {
@@ -300,11 +301,11 @@ export class ApiService {
     }).toPromise();
   }
 
-  getContent(owner:string,repo:string,path:string):Promise<null>{
+  getContent(owner:string,repo:string,path:string):Promise<Content[]>{
     return this.http.get(`/repos/${owner}/${repo}/contents${path}`,{
       headers:this.restfulHeaders
-    }).toPromise().then(() => {
-
+    }).toPromise().then((response:Response) => {
+      return response.json();
     });
   }
 
