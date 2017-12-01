@@ -23,7 +23,7 @@ export class AccountService {
     private http: Http,
   ) {}
 
-  oAuth():Promise<null>{
+  oAuth():Promise<void>{
     let state:string='';
     let possible="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     for (let i = 0; i < 10; i++){
@@ -87,7 +87,7 @@ export class AccountService {
   }
 
 
-  obtainAccessToken(code,state):Promise<null>{
+  obtainAccessToken(code,state):Promise<void>{
     return this.http.post(`${CONST.githubUrl}/login/oauth/access_token`,
       `client_id=ca1ddf99e44c2e6cb787&client_secret=61335ff161c4c0fda8fbf68beb0e1bee55380414&code=${code}&redirect_uri=https%3A%2F%2Fawmleer.github.io%2FGitMug%2Foauth%2Fcallback.html&state=${state}`,
       {
@@ -111,11 +111,11 @@ export class AccountService {
     });
   }
 
-  saveUserData():Promise<null>{
+  saveUserData():Promise<void>{
     return this.storage.set('user',this.user);
   }
 
-  fetchUserDataFromStorage():Promise<null>{
+  fetchUserDataFromStorage():Promise<void>{
     return this.storage.get('user').then((user:UserStorage)=>{
       if (user) {
         this.user.login=user.login;
@@ -129,7 +129,7 @@ export class AccountService {
   }
 
 
-  freshUser():Promise<null>{
+  freshUser():Promise<void>{
     if (!this.apiSvc.getAccessToken()) {
       throw new Error('No token');
     }
@@ -142,7 +142,7 @@ export class AccountService {
   }
 
 
-  logout():Promise<null>{
+  logout():Promise<void>{
     this.user=new UserStorage();
     this.userUpdated.emit();
     return this.saveUserData();

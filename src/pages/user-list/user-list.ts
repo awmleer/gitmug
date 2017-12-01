@@ -42,7 +42,7 @@ export class UserListPage {
   }
 
 
-  initUsers():Promise<null>{
+  initUsers():Promise<void>{
     let loading=this.loadingCtrl.create({
       spinner: 'dots',
       content: 'Loading'
@@ -61,7 +61,7 @@ export class UserListPage {
     });
   }
 
-  appendUsers():Promise<null>{
+  appendUsers():Promise<void>{
     return this.getUsers(this.pageInfo?this.pageInfo.endCursor:null).then(data=>{
       this.totalCount=data.totalCount;
       this.pageInfo=data.pageInfo;

@@ -257,7 +257,7 @@ export class ApiService {
     });
   }
 
-  starMutation(action:'add'|'remove',starrableId:string):Promise<null>{
+  starMutation(action:'add'|'remove',starrableId:string):Promise<void>{
     let mutationId:string='';
     let possible="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     for (let i = 0; i < 10; i++){
@@ -278,16 +278,16 @@ export class ApiService {
     });
   }
 
-  addStar(starrableId:string):Promise<null>{
+  addStar(starrableId:string):Promise<void>{
     return this.starMutation('add',starrableId);
   }
 
-  removeStar(starrabledId:string):Promise<null>{
+  removeStar(starrabledId:string):Promise<void>{
     return this.starMutation('remove',starrabledId);
   }
 
 
-  followUser(login:string):Promise<null>{
+  followUser(login:string):Promise<void>{
     let headers=new Headers(this.restfulHeaders);
     headers.set('Content-Length','zero');
     return this.http.put(CONST.apiUrl+`/user/following/${login}`,'',{
@@ -295,7 +295,7 @@ export class ApiService {
     }).toPromise();
   }
 
-  unfollowUser(login:string):Promise<null>{
+  unfollowUser(login:string):Promise<void>{
     return this.http.delete(CONST.apiUrl+`/user/following/${login}`,{
       headers:this.restfulHeaders
     }).toPromise();

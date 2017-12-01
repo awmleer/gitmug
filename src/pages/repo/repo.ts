@@ -62,7 +62,7 @@ export class RepoPage {
   }
 
 
-  freshenRepoDetail():Promise<null>{
+  freshenRepoDetail():Promise<void>{
     this.freshenRepoReadme();
     return this.apiSvc.getRepo(this.repoParam.owner,this.repoParam.name).then((repo)=>{
       this.repo=repo;
@@ -98,7 +98,7 @@ export class RepoPage {
     });
   }
 
-  freshenRepoReadme():Promise<null>{
+  freshenRepoReadme():Promise<void>{
     return this.apiSvc.getRepoReadme(this.repoParam).then((readme:string)=>{
       this.readme=readme;
     });

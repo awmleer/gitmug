@@ -61,7 +61,7 @@ export class DashboardPage {
     });
   }
 
-  freshenEvents():Promise<null>{
+  freshenEvents():Promise<void>{
     if (this.accountSvc.user.login) {
       return this.apiSvc.getReceivedEvents(this.accountSvc.user.login).then(events=>{
         this.events=events;

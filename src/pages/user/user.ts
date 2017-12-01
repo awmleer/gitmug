@@ -55,7 +55,7 @@ export class UserPage {
     })
   }
 
-  freshenUserProfile():Promise<null>{
+  freshenUserProfile():Promise<void>{
     return this.getUserProfile().then((userProfile:UserProfile)=>{
       this.userProfile=userProfile;
     }).catch(() => {

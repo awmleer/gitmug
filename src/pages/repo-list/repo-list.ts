@@ -62,7 +62,7 @@ export class RepoListPage {
     return loading;
   }
 
-  initRepos():Promise<null>{
+  initRepos():Promise<void>{
     let loading=this.startLoading();
     this.repos=[];
     this.pageInfo=null;
@@ -76,7 +76,7 @@ export class RepoListPage {
     });
   }
 
-  appendRepos():Promise<null>{
+  appendRepos():Promise<void>{
     return this.getRepos(this.pageInfo?this.pageInfo.endCursor:null).then(data=>{
       this.totalCount=data.totalCount;
       this.pageInfo=data.pageInfo;
