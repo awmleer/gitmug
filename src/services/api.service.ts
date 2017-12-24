@@ -292,13 +292,13 @@ export class ApiService {
     headers.set('Content-Length','zero');
     return this.http.put(CONST.apiUrl+`/user/following/${login}`,'',{
       headers:headers
-    }).toPromise();
+    }).toPromise().then(() => {});
   }
 
   unfollowUser(login:string):Promise<void>{
     return this.http.delete(CONST.apiUrl+`/user/following/${login}`,{
       headers:this.restfulHeaders
-    }).toPromise();
+    }).toPromise().then(() => {});
   }
 
   getContent(owner:string,repo:string,path:string):Promise<Content[]>{

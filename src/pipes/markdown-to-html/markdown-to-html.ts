@@ -20,12 +20,11 @@ export class MarkdownToHtmlPipe implements PipeTransform {
     let imgs=dom.getElementsByTagName('img');
     for(let i=0;i<imgs.length;i++){
       let img=imgs[i];
-      img.setAttribute(
-        'src',
-        img.getAttribute('src')
-          .replace(/^\.\//,baseUrl+'/')
-          .replace(/^\.\.\//,baseUrl+'/../')
-      );
+      let imgSrc=img.getAttribute('src');
+      if(!(imgSrc.match(/^http:\/\//) || imgSrc.match(/^https:\/\//) || imgSrc.match(/^\/\//) )){
+        imgSrc=baseUrl+'/'+imgSrc;
+      }
+      img.setAttribute('src', imgSrc);
     }
     //fix <a>
     let aTags=dom.getElementsByTagName('a');
