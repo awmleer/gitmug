@@ -7,6 +7,7 @@ import {colors} from "../../classes/language-color";
 import {WatchersPage} from "../user-list/watchers";
 import {StargazersPage} from "../user-list/stargazers";
 import {RepoForksPage} from "../repo-list/repo-forks";
+import {CodeListPage} from "../code-list/code-list";
 
 
 
@@ -98,6 +99,12 @@ export class RepoPage {
     });
   }
 
+  viewCode(){
+    this.navCtrl.push(CodeListPage, {
+      repoParam: this.repoParam
+    });
+  }
+
   freshenRepoReadme():Promise<void>{
     return this.apiSvc.getRepoReadme(this.repoParam).then((readme:string)=>{
       this.readme=readme;
@@ -121,5 +128,6 @@ export class RepoPage {
       });
     }
   }
+
 
 }
