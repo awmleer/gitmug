@@ -1,12 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {ApiService} from "../../services/api.service";
+import {RepoParam} from "../../classes/repo";
+import {Content} from "../../classes/content";
 
-/**
- * Generated class for the CodeListPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -15,11 +12,27 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class CodeListPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  contents:Content[];
+
+  constructor(
+    private navCtrl: NavController,
+    private navParams: NavParams,
+    private apiSvc: ApiService,
+  ) {}
+
+  ionViewWillLoad(){
+    this.apiSvc.getContents(this.repoParam, this.path).then((contents:Content[]) => {
+      console.log(contents);
+      this.contents=contents;
+    })
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad CodeListPage');
+  get repoParam():RepoParam{
+    return this.navParams.get('repoParam');
+  }
+
+  get path():string{
+    return this.navParams.get('path');
   }
 
 }

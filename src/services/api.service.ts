@@ -309,6 +309,12 @@ export class ApiService {
     });
   }
 
+  getContents(repoParam:RepoParam, path:string):Promise<Content[]>{
+    return this.restfulGet(CONST.apiUrl+`/repos/${repoParam.owner}/${repoParam.name}/contents${path}`).then((response) => {
+      return response.json();
+    });
+  }
+
   // getRepoReadmeUrl(repo:RepoParam):Promise<string>{
   //   return this.restfulGet(CONST.apiUrl+`/repos/${repo.owner}/${repo.name}/readme`).then((response:Response)=>{
   //     return response.json()['html_url'];

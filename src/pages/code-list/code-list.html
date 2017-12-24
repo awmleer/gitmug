@@ -1,18 +1,38 @@
-<!--
-  Generated template for the CodeListPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
   <ion-navbar>
-    <ion-title>code-list</ion-title>
+    <ion-title>{{repoParam.name}}</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+  <p>
+    {{path}}
+  </p>
+  <ion-list *ngIf="contents">
+    <ng-container *ngFor="let content of contents">
+      <ion-item *ngIf="content.type=='dir'">
+        <ion-icon name="folder" item-start></ion-icon>
+        {{content.name}}
+      </ion-item>
+    </ng-container>
 
+    <ng-container *ngFor="let content of contents">
+      <ion-item *ngIf="content.type=='file'">
+        <ion-icon name="document" item-start></ion-icon>
+        {{content.name}}
+      </ion-item>
+      <ion-item *ngIf="content.type=='symlink'">
+        <ion-icon name="link" item-start></ion-icon>
+        {{content.name}}
+      </ion-item>
+      <ion-item *ngIf="content.type=='submodule'">
+        <ion-icon name="filing" item-start></ion-icon>
+        {{content.name}}
+      </ion-item>
+    </ng-container>
+
+  </ion-list>
 </ion-content>
