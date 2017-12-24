@@ -102,7 +102,7 @@ export class RepoPage {
   viewCode(){
     this.navCtrl.push(CodeListPage, {
       repoParam: this.repoParam,
-      path: '/'
+      path: ''
     });
   }
 

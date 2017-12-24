@@ -301,17 +301,17 @@ export class ApiService {
     }).toPromise().then(() => {});
   }
 
-  getContent(owner:string,repo:string,path:string):Promise<Content[]>{
-    return this.http.get(`/repos/${owner}/${repo}/contents${path}`,{
-      headers:this.restfulHeaders
-    }).toPromise().then((response:Response) => {
+  getContents(repoParam:RepoParam, path:string):Promise<Content[]>{
+    return this.restfulGet(CONST.apiUrl+`/repos/${repoParam.owner}/${repoParam.name}/contents/${path}`).then((response) => {
       return response.json();
     });
   }
 
-  getContents(repoParam:RepoParam, path:string):Promise<Content[]>{
-    return this.restfulGet(CONST.apiUrl+`/repos/${repoParam.owner}/${repoParam.name}/contents${path}`).then((response) => {
-      return response.json();
+  getFileContent(repo:RepoParam, path:string):Promise<string>{
+    return this.restfulGet(CONST.rawUrl+`/${repo.owner}/${repo.name}/master/${path}`).then((response)=>{
+      return response.text();
+    }).catch(()=>{
+      return null;
     });
   }
 

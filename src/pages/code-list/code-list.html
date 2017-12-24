@@ -9,21 +9,21 @@
 
 <ion-content padding>
   <p>
-    {{path}}
+    /{{path}}
   </p>
   <ion-list *ngIf="contents">
     <ng-container *ngFor="let content of contents">
-      <ion-item *ngIf="content.type=='dir'">
+      <button ion-item *ngIf="content.type=='dir'" (click)="viewDir(content.path)">
         <ion-icon name="folder" item-start></ion-icon>
         {{content.name}}
-      </ion-item>
+      </button>
     </ng-container>
 
     <ng-container *ngFor="let content of contents">
-      <ion-item *ngIf="content.type=='file'">
+      <button ion-item *ngIf="content.type=='file'" (click)="viewFile(content.path)">
         <ion-icon name="document" item-start></ion-icon>
         {{content.name}}
-      </ion-item>
+      </button>
       <ion-item *ngIf="content.type=='symlink'">
         <ion-icon name="link" item-start></ion-icon>
         {{content.name}}

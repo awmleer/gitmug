@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {ApiService} from "../../services/api.service";
 import {RepoParam} from "../../classes/repo";
 import {Content} from "../../classes/content";
+import {CodeDetailPage} from "../code-detail/code-detail";
 
 
 @IonicPage()
@@ -21,6 +22,7 @@ export class CodeListPage {
   ) {}
 
   ionViewWillLoad(){
+    //TODO add loading
     this.apiSvc.getContents(this.repoParam, this.path).then((contents:Content[]) => {
       console.log(contents);
       this.contents=contents;
@@ -34,5 +36,20 @@ export class CodeListPage {
   get path():string{
     return this.navParams.get('path');
   }
+
+  viewDir(path:string){
+    this.navCtrl.push(CodeListPage,{
+      repoParam: this.repoParam,
+      path: path
+    });
+  }
+
+  viewFile(path:string){
+    this.navCtrl.push(CodeDetailPage,{
+      repoParam: this.repoParam,
+      path: path
+    });
+  }
+
 
 }

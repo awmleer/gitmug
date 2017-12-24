@@ -23,6 +23,7 @@ import {SettingsPageModule} from "../pages/settings/settings.module";
 import {UpdateService} from "../services/update.service";
 import {ContentListPageModule} from "../pages/content-list/content-list.module";
 import {CodeListPageModule} from "../pages/code-list/code-list.module";
+import {CodeDetailPageModule} from "../pages/code-detail/code-detail.module";
 
 
 @NgModule({
@@ -44,6 +45,7 @@ import {CodeListPageModule} from "../pages/code-list/code-list.module";
     RepoPageModule,
     SettingsPageModule,
     CodeListPageModule,
+    CodeDetailPageModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
