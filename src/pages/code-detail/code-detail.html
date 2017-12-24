@@ -6,6 +6,6 @@
 
 
 <ion-content padding>
-  <div class="code | sanitizeHtml" [innerHtml]="content"></div>
+  <div class="code" [innerHtml]="content | sanitizeHtml" *ngIf="content"></div>
 </ion-content>
 
