@@ -6,6 +6,7 @@ page-code-detail {
     font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
     font-size: 12px;
     border-radius: 4px;
+    overflow-x: scroll;
   }
 
   .code /deep/ .hljs {

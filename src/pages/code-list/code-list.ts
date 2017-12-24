@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {IonicPage, LoadingController, NavController, NavParams} from 'ionic-angular';
 import {ApiService} from "../../services/api.service";
 import {RepoParam} from "../../classes/repo";
 import {Content} from "../../classes/content";
 import {CodeDetailPage} from "../code-detail/code-detail";
+import {ToastService} from "../../services/toast.service";
 
 
 @IonicPage()
@@ -19,14 +20,25 @@ export class CodeListPage {
     private navCtrl: NavController,
     private navParams: NavParams,
     private apiSvc: ApiService,
+    private loadingCtrl: LoadingController,
+    private toastSvc: ToastService,
   ) {}
 
   ionViewWillLoad(){
-    //TODO add loading
+    let loading=this.loadingCtrl.create({
+      spinner: 'dots',
+      content: 'Loading'
+    });
+    loading.present();
     this.apiSvc.getContents(this.repoParam, this.path).then((contents:Content[]) => {
-      console.log(contents);
       this.contents=contents;
-    })
+      loading.dismiss();
+    }).catch(()=>{
+      this.navCtrl.pop();
+      loading.dismiss().then(()=>{
+        this.toastSvc.toast('Fail to load file list');
+      });
+    });;
   }
 
   get repoParam():RepoParam{
