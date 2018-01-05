@@ -39,7 +39,7 @@
     "ionic-angular": "3.9.2",
     "ionic-plugin-keyboard": "~2.2.1",
     "ionicons": "3.0.0",
-    "marked": "^0.3.6",
+    "marked": "^0.3.9",
     "moment": "^2.18.1",
     "rxjs": "5.5.2",
     "sw-toolbox": "3.6.0",
