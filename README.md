@@ -1,6 +1,6 @@
 # GitMug
 
-The GitHub app for minimalists.  [HomePage](https://awmleer.github.io/GitMug/index.html)
+The GitHub app for minimalists.  [HomePage](https://awmleer.github.io/gitmug/index.html)
 
 ![homepage screenshot](./screenshots/homepage.png)
 
